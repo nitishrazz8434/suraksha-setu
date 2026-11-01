@@ -15,7 +15,9 @@ npm run dev
 
 Open the Local URL printed by the server, normally http://127.0.0.1:5173. Local development identity and storage are separate from hosted accounts. Keep `.wrangler/state` to retain local records. Hosted access uses platform sign-in and account-scoped D1/R2 storage.
 
-The application starts with empty registers. Add districts, settlements, actual households and reviewed sites through **Data register**, or import CSV files using the blank column templates downloaded there. Import hazard footprints as GeoJSON with source and observation time. See [Operations guide](docs/OPERATIONS.md) for the complete workflow.
+The application automatically connects Wayanad, Idukki and Kozhikode for an empty account. It opens with real geography, nine named origins, eleven public schools, published infrastructure and eighteen measured roads, then loads current seven-day weather forecasts. Open **Relocation planning** for an immediate calculated preparedness assessment. Change resource/exposure assumptions, compare results and save/export a plan. See [Connected data and calculations](docs/CONNECTED_DATA.md).
+
+Use **Data register** and **Registered household movements** for actual household records, field-reviewed capacity, approvals and arrivals. Existing account data is preserved. Import hazard footprints as GeoJSON with provenance. See [Operations guide](docs/OPERATIONS.md).
 
 ## Included workflows
 
@@ -32,11 +34,11 @@ The application starts with empty registers. Add districts, settlements, actual 
 | Documents and reporting | PDF/text ingestion, operations briefs, print/PDF, allocation CSV, backup/restore and activity history |
 | Reliability | Optimistic revisions, unsaved-edit outbox, conflict rejection, authoritative plan actions, isolated evidence files and legacy recovery |
 
-No population, incident, capacity, hazard footprint or route is preloaded into operational registers. Missing evidence remains **Unassessed**. Only verified, unexpired hazard evidence contributes to assessment; model outputs require explicit incident review.
+The connected dashboard uses attributed historical census values, real infrastructure and weather feeds. Preparedness exposure, household distribution and usable capacity are explicit assumptions. Actual residents, incident reports and official hazard footprints are never fabricated. Missing hazard evidence remains **Unassessed**. Only reviewed evidence affects operational eligibility.
 
 ## Neural inference
 
-Models execute on the device in a WebAssembly worker using Transformers.js. First use downloads public pretrained weights from Hugging Face; subsequent use can reuse browser cache. No inference API key is required.
+Models execute on the device in a packaged standalone WebAssembly worker using Transformers.js. First use downloads public pretrained weights from Hugging Face; subsequent use can reuse browser cache. No inference API key is required.
 
 | Model | Task | Interpretation |
 | --- | --- | --- |
@@ -78,6 +80,6 @@ npm run test:models
 npm run test:models:extended
 ```
 
-Set `RUN_ROUTING_SMOKE=1` to include external OSRM verification in `test:api`. Test records use isolated development identities and never populate the normal workspace. See [Validation](docs/VALIDATION.md) and [Architecture](docs/ARCHITECTURE.md).
+Set `RUN_ROUTING_SMOKE=1` and `RUN_FEED_SMOKE=1` to include external OSRM/weather verification in `test:api`. Test records use isolated development identities and never populate the normal workspace. See [Validation](docs/VALIDATION.md) and [Architecture](docs/ARCHITECTURE.md).
 
 Additional Python pipelines support domain-specific model development independently of the working browser models; see [Model extensions](ml/README.md). Dataset licensing, event-disjoint validation and measured performance are necessary before domain-specific forecasting or safety claims.

@@ -1,3 +1,4 @@
+import type {Assessment} from "./assessment";
 export type Hazard="Flood"|"Landslide"|"Infrastructure"|"Unspecified";
 export type Severity="Critical"|"High"|"Moderate"|"Low";
 export interface District{id:string;name:string;state:string;lat:number;lng:number;}
@@ -14,5 +15,5 @@ export interface Scenario{name:string;unavailableSites:string[];closedRoutes:str
 export interface Assignment{householdId:string;settlementId:string;siteId:string;people:number;assisted:boolean;routeId:string;distance:number;status:"Planned"|"In transit"|"Arrived"|"Cancelled";}
 export interface Plan{id:string;createdAt:string;districtId:string;status:"Draft"|"Approved"|"In progress"|"Completed"|"Cancelled";assignments:Assignment[];served:number;demand:number;unallocated:number;distance:number;priorityCoverage:number;scenario:Scenario;solverStatus:"Optimal"|"Feasible";inputSignature:string;}
 export interface Activity{id:string;text:string;time:string;type:"report"|"plan"|"site"|"registry"|"scenario";}
-export interface Workspace{version:2;districts:District[];activeDistrictId:string;settlements:Settlement[];households:Household[];sites:Site[];hazards:HazardLayer[];routes:RouteRecord[];reports:Report[];scenario:Scenario;plans:Plan[];activity:Activity[];tasks:{id:string;districtId:string;title:string;team:string;done:boolean}[];documents:{id:string;districtId:string;name:string;text:string}[];}
+export interface Workspace{assessments?:Assessment[];version:2;districts:District[];activeDistrictId:string;settlements:Settlement[];households:Household[];sites:Site[];hazards:HazardLayer[];routes:RouteRecord[];reports:Report[];scenario:Scenario;plans:Plan[];activity:Activity[];tasks:{id:string;districtId:string;title:string;team:string;done:boolean}[];documents:{id:string;districtId:string;name:string;text:string}[];}
 export interface Extraction{hazard:Hazard;severity:Severity;settlement:string;people:number|null;needs:string[];entities:{text:string;type:string}[];}

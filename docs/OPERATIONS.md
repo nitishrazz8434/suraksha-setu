@@ -1,5 +1,11 @@
 # Operations guide
 
+## Start with connected intelligence
+
+An empty account connects three Kerala districts automatically. The dashboard shows source-linked population, school infrastructure, measured roads and seven-day weather. Open Relocation planning to run the preparedness model immediately; adjust assumptions, compare resource stress, save results and export allocations. Image intelligence can load the attributed historical Wayanad photograph and run a real model without requiring an upload.
+
+Preparedness scenarios use estimated demand and candidate resources. For actual household movement, follow the reviewed operating-record workflow below.
+
 ## Register an operating area
 
 1. In **Data register → Districts**, add each district's name, state and map centre. Select one district or **All districts** in the sidebar.

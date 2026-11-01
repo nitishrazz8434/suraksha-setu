@@ -27,7 +27,7 @@ React/TypeScript renders the interface using Vinext. The Cloudflare Worker authe
 
 The model worker serializes requests, disposes the previous task's model and caches weights. MobileBERT classifies English reports; MiniLM handles multilingual matching; SegFormer, YOLOS and CLIP analyze uploads; FLAN-T5 receives calculated evidence. General pretrained outputs require review before incident verification.
 
-Workspace version 2 contains districts, settlements, variable-sized households, sites, hazard geometry, measured routes, reports, documents, plans, tasks and activity. All operational registers start empty. Records have district or settlement references. Cross-district destinations require explicit opt-in.
+Workspace version 2 contains districts, settlements, variable-sized households, sites, hazard geometry, measured routes, reports, documents, plans, tasks and activity. An empty account is initialized with attributed district, origin, candidate-facility, document and measured-road references. No households or incidents are generated. A separate preparedness assessment register stores scenarios and results. Records have district or settlement references. Cross-district destinations require explicit opt-in.
 
 ## Tenancy and persistence
 
@@ -56,3 +56,8 @@ Plans retain a SHA-256 input signature. Approval checks inputs, routes, requirem
 An account-keyed outbox retains unsaved edits. Network failures retry; conflicts and rejected writes stop automatic overwrites and expose the draft for export. Full offline reload/maps are not provided. JSON backups include records and document text; image binaries remain in account-owned R2 storage.
 
 Copilot shows calculated evidence alongside generated language. MiniLM retrieves source passages; FLAN-T5 receives bounded context. A numerical guard can reject new numbers but does not guarantee factuality. The assistant cannot approve plans or confirm movements. Optional Python model endpoints use server-side credentials and are independent of browser inference.
+
+
+## Connected data
+
+See [Connected data](CONNECTED_DATA.md). /api/bootstrap initializes references without overwriting an existing operating area; /api/monitor provides fifteen-minute cached Open-Meteo records. Preparedness integer-cohort allocation is separate from actual household movements. The standalone inference worker is bundled with esbuild before development/build to preserve environment detection across framework boundaries.
