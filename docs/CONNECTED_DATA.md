@@ -4,7 +4,7 @@ The application opens with Wayanad, Idukki and Kozhikode connected automatically
 
 Every facility links to its individual Kerala KITE Sametham record. Census 2011 district populations are historical reference values, not current evacuee counts. The GeoNames/OSM coordinates and OSM boundaries retain their source links. See [data attribution](../public/data/ATTRIBUTION.md). The importer validates school districts; the test suite checks all origins and facilities against their district geometry.
 
-Open-Meteo provides current model conditions and seven-day daily forecasts at district reference coordinates. The server caches public forecasts in R2 for fifteen minutes and includes observation time. Unavailable feeds retain explicitly marked cached data or show unavailable values. Rainfall bands are screening heuristics over the next three days: below 15, 15–35, 35–65 and at least 65 mm/day. They are not official warning categories or validated flood/landslide probabilities.
+Open-Meteo provides current model conditions and seven-day daily forecasts at district reference coordinates. The browser retrieves public forecasts directly and caches them for fifteen minutes with observation time. The optional server endpoint uses R2 caching and a retry interval on provider failures. Unavailable feeds retain explicitly marked cached data or show unavailable values. Rainfall bands are screening heuristics over the next three days: below 15, 15–35, 35–65 and at least 65 mm/day. They are not official warning categories or validated flood/landslide probabilities.
 
 ## Preparedness allocation
 

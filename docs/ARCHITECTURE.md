@@ -60,4 +60,4 @@ Copilot shows calculated evidence alongside generated language. MiniLM retrieves
 
 ## Connected data
 
-See [Connected data](CONNECTED_DATA.md). /api/bootstrap initializes references without overwriting an existing operating area; /api/monitor provides fifteen-minute cached Open-Meteo records. Preparedness integer-cohort allocation is separate from actual household movements. The standalone inference worker is bundled with esbuild before development/build to preserve environment detection across framework boundaries.
+See [Connected data](CONNECTED_DATA.md). /api/bootstrap initializes references without overwriting an existing operating area; /api/monitor provides fifteen-minute cached Open-Meteo records for server consumers; the interface fetches forecasts directly from the browser to avoid shared hosting egress quotas. Preparedness integer-cohort allocation is separate from actual household movements. The standalone inference worker is bundled with esbuild before development/build to preserve environment detection across framework boundaries.

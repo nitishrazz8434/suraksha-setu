@@ -44,3 +44,12 @@ test("invalid vehicle grouping and inconsistent stored totals are rejected",asyn
 test("missing rainfall observations stay unknown and screening never changes the hazard register",()=>{
  const w=createWorkspace();assert.equal(rainOutlook().label,"Awaiting forecast");const r=rainOutlook({districtId:"test",fetchedAt:new Date().toISOString(),observedAt:"",source:"Unit-test forecast",temperature:null,precipitation:null,weatherCode:null,days:[{date:"2026-11-01",rain:70,probability:100,high:30,low:20}]});assert.equal(r.label,"High rainfall outlook");assert.equal(w.hazards.length,0);
 });
+
+import {decodeForecast,unavailableForecast,weatherUrl} from "../lib/weather";
+test("weather decoding preserves zero measurements, nulls and source time",()=>{
+ const f=decodeForecast("D",{current:{time:"2026-11-01T22:00",temperature_2m:0,precipitation:0,weather_code:0},daily:{time:["2026-11-01"],precipitation_sum:[0],temperature_2m_max:[null]}});
+ assert.equal(f.temperature,0);assert.equal(f.days[0].rain,0);assert.equal(f.days[0].high,null);assert.equal(f.observedAt,"2026-11-01T22:00:00+05:30");assert.throws(()=>decodeForecast("D",{}));assert.equal(unavailableForecast("D","rate limited").temperature,null);
+});
+test("weather request uses a fixed public provider and only district coordinates",()=>{
+ const url=new URL(weatherUrl({lat:11.7,lng:76.1}));assert.equal(url.origin,"https://api.open-meteo.com");assert.equal(url.searchParams.get("latitude"),"11.7");assert.equal(url.searchParams.get("forecast_days"),"7");assert.equal(url.searchParams.get("timezone"),"Asia/Kolkata");
+});
