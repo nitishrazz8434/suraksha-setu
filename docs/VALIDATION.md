@@ -1,21 +1,33 @@
 # Validation record
 
-Validated on 1 November 2026.
+Release checks performed on 1 November 2026.
 
-## Passed
+## Automated checks
 
-- TypeScript strict type checking (`npm run typecheck`).
-- 14 automated engine/schema checks (`npm test`): resource bottlenecks, household and capacity conservation, assisted-site eligibility, verified/pending/resolved road closures, excluded sites, global versus greedy coverage under stress, extraction, duplicates, grounded answers, invalid imports, stale-plan review, capped verified-incident risk contributions and Hindi/unknown-hazard handling.
-- 8 local API integration checks (`npm run test:api`): durable write/read, optimistic revision conflicts, invalid record rejection, cross-origin rejection, assistant grounding, bilingual extraction, R2 upload/retrieval and rejection of client-forged identity through local sign-in middleware.
-- All 11 Python modules parse successfully.
-- Browser workflow: created and verified a synthetic bridge-closure report. Allocation changed from 2,900/2,944 to 2,112/2,944; unallocated demand changed from 44 to 832. The assistant answered from actual settlement records. The image workbench produced a computed synthetic mask and measured synthetic IoU. Basemap rendering was visually checked after changing providers.
+- TypeScript strict checking and production Worker/client build.
+- 17 engine/schema tests: empty registers, district isolation, resource reviews, unassessed evidence, polygon holes and crossings, indivisible variable-size households, cross-district policy, stale/missing routes, reviewed closures, longer-term eligibility, reservations, exactly-once arrivals, stale signatures, import references/totals, English/Hindi extraction, calculated answers and CSV escaping.
+- 17 local API checks with external routing enabled: empty current workspace, R2 persistence, stale revisions, invalid resources, origin rejection, isolated development identities, assistant values, Hindi aliases, owner-isolated uploads, stale-plan rejection, authoritative approval, occupancy updates, duplicate arrivals, completed whole-household movement, closed-plan cancellation rejection, invalid coordinates and actual OSRM geometry/distance/duration.
+- Test fixtures use isolated local identities and never populate the normal operational workspace.
 
-## Limits
+## Actual pretrained model execution
 
-- Python model dependencies, GPU training, checkpoints and real model benchmarks were not executed in this environment. Syntax checking does not establish numerical correctness of training or inference.
-- Voice recognition depends on browser support and microphone permission; microphone access was not exercised.
-- The local authentication simulator supplies one identity. Real two-account isolation was not tested, although server-side records and uploads are owner-scoped.
-- Browser automation disconnected after the initial desktop checks. A separate mobile visual pass and the final hosted browser flow could not be verified through that connection.
-- Network basemaps and optional inference services depend on third-party availability. Scenario data is synthetic and is not an operational advisory.
+All six quantized public models loaded and ran through Transformers.js and the ONNX CPU backend:
 
-The model metrics workspace calculates results only from imported predictions. The downloadable CSV is a format example, not a benchmark.
+| Model | Executed check |
+| --- | --- |
+| MobileBERT MNLI | Flood report ranked flooding above unrelated categories |
+| SegFormer B0 ADE20K | Public house image produced eight scene-mask classes |
+| FLAN-T5 Small | Answered 100 from supplied evidence of 100 available places |
+| CLIP | Ranked house above flood for a house image |
+| YOLOS Tiny | Completed detection; no category exceeded threshold in that image |
+| Multilingual MiniLM | Produced normalized 384-dimensional English/Hindi embeddings |
+
+Reproduce with npm run test:models and npm run test:models:extended. These are execution checks, not disaster-domain accuracy benchmarks. Browser deployment uses the same model identifiers with packaged WebAssembly; CPU checks do not independently verify browser-worker execution.
+
+## Verification limits
+
+- Browser-control infrastructure was unavailable during this release. Revised visual layout, mobile rendering and browser-model interactions were not exercised end to end. HTTP/API behavior, static assets, types and production bundling were checked separately.
+- Microphone permissions and speech recognition/playback were not exercised.
+- Isolation was checked with local development identities and scoped evidence reads; a two-account hosted interactive session was not exercised.
+- Optional custom Python training and domain-specific benchmarks were not performed. Browser models are real pretrained general models, not regionally validated hazard forecasts.
+- OSRM geometry does not establish emergency clearance. Resources, hazard evidence and decisions require maintained sources and review. No measured reduction in disaster losses or certification of site safety is claimed.

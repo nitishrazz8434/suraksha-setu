@@ -1,18 +1,9 @@
-import { db, owner, safeMutation, sha } from "../../../lib/server";
-import { seedWorkspace } from "../../../lib/seed";
-import { workspaceSchema } from "../../../lib/validation";
-export async function GET(request:Request){
- const user=owner(request);if(user instanceof Response)return user;
- try{const row=await db().prepare("SELECT payload, revision FROM workspaces WHERE owner_id = ?").bind(user).first<{payload:string;revision:number}>();return Response.json({workspace:row?JSON.parse(row.payload):seedWorkspace(),revision:row?.revision??0,workspaceKey:await sha(user)},{headers:{"Cache-Control":"no-store"}});}
- catch{ return Response.json({error:"Workspace storage is unavailable. Check database migrations."},{status:503}); }
-}
-export async function PUT(request:Request){
- const user=owner(request);if(user instanceof Response)return user;if(!safeMutation(request))return Response.json({error:"Invalid origin"},{status:403});
- if(Number(request.headers.get("content-length")??0)>3000000)return Response.json({error:"Workspace exceeds size limit"},{status:413});
- try{const raw=await request.text();if(raw.length>3000000)return Response.json({error:"Workspace exceeds size limit"},{status:413});const body=JSON.parse(raw),parsed=workspaceSchema.safeParse(body.workspace);if(!parsed.success||!Number.isInteger(body.revision)||body.revision<0)return Response.json({error:"Invalid workspace data"},{status:400});
-  const payload=JSON.stringify(parsed.data),now=new Date().toISOString();
-  const result=body.revision===0?await db().prepare("INSERT INTO workspaces (owner_id,payload,revision,updated_at) VALUES (?,?,1,?) ON CONFLICT(owner_id) DO NOTHING").bind(user,payload,now).run():await db().prepare("UPDATE workspaces SET payload=?,revision=revision+1,updated_at=? WHERE owner_id=? AND revision=?").bind(payload,now,user,body.revision).run();
-  if(!result.meta.changes)return Response.json({error:"Another session changed this workspace. Reload to review the latest version."},{status:409});
-  return Response.json({revision:body.revision+1});
- }catch{return Response.json({error:"Unable to save workspace"},{status:503});}
-}
+import{owner,safeMutation,sha,db}from"../../../lib/server";
+import{readWorkspace,writeWorkspace}from"../../../lib/persistence";
+import{workspaceSchema}from"../../../lib/validation";
+import{planIssues,signature}from"../../../lib/engine";
+export async function GET(request:Request){const user=owner(request);if(user instanceof Response)return user;try{const{workspace,revision}=await readWorkspace(user),archive=await db().prepare("SELECT owner_id FROM workspace_archives WHERE owner_id=?").bind(user).first();return Response.json({workspace,revision,workspaceKey:await sha(user),archiveAvailable:!!archive},{headers:{"Cache-Control":"no-store"}});}catch{return Response.json({error:"Workspace storage is unavailable. Check migrations and storage bindings."},{status:503});}}
+export async function PUT(request:Request){const user=owner(request);if(user instanceof Response)return user;if(!safeMutation(request))return Response.json({error:"Invalid origin"},{status:403});if(Number(request.headers.get("content-length")??0)>12000000)return Response.json({error:"Workspace exceeds 12 MB. Export documents and older route records."},{status:413});try{const raw=await request.text();if(new TextEncoder().encode(raw).length>12000000)return Response.json({error:"Workspace exceeds 12 MB"},{status:413});const body=JSON.parse(raw),parsed=workspaceSchema.safeParse(body.workspace);if(!parsed.success||!Number.isInteger(body.revision)||body.revision<0)return Response.json({error:parsed.success?"Invalid revision":parsed.error.issues[0]?.message??"Invalid workspace"},{status:400});const previous=await readWorkspace(user);if(previous.revision!==body.revision)return Response.json({error:"Another session changed this workspace. Reload before saving."},{status:409});const next=parsed.data;
+ for(const p of next.plans){const old=previous.workspace.plans.find(x=>x.id===p.id);if(p.status==="Approved"&&old?.status!=="Approved"){if(p.inputSignature!==await signature(next,p.scenario))return Response.json({error:"The plan inputs changed. Recalculate and review the allocation."},{status:400});const issues=planIssues(p,next);if(issues.length)return Response.json({error:issues[0]},{status:400});}const newArrivals=p.assignments.filter(a=>a.status==="Arrived"&&old?.assignments.find(x=>x.householdId===a.householdId)?.status!=="Arrived");for(const a of newArrivals){if(!old||!["Approved","In progress"].includes(old.status))return Response.json({error:"Movement must belong to an approved plan"},{status:400});}}
+ for(const site of next.sites){const old=previous.workspace.sites.find(s=>s.id===site.id);if(!old)continue;const arrivals=next.plans.flatMap(p=>p.assignments.filter(a=>a.siteId===site.id&&a.status==="Arrived"&&previous.workspace.plans.find(x=>x.id===p.id)?.assignments.find(x=>x.householdId===a.householdId)?.status!=="Arrived")).reduce((n,a)=>n+a.people,0);if(arrivals&&site.occupancy<old.occupancy+arrivals)return Response.json({error:"Confirmed arrivals must increase site occupancy"},{status:400});}
+ const saved=await writeWorkspace(user,next,body.revision,previous.raw);if(!saved)return Response.json({error:"Workspace revision conflict. Reload before saving."},{status:409});return Response.json({revision:body.revision+1});}catch{return Response.json({error:"Unable to save workspace"},{status:503});}}

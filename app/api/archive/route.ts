@@ -1,0 +1,2 @@
+import{owner,db}from"../../../lib/server";
+export async function GET(request:Request){const user=owner(request);if(user instanceof Response)return user;const row=await db().prepare("SELECT payload FROM workspace_archives WHERE owner_id=?").bind(user).first<{payload:string}>();if(!row)return Response.json({error:"No previous workspace archive exists"},{status:404});return new Response(row.payload,{headers:{"Content-Type":"application/json","Content-Disposition":"attachment; filename=suraksha-workspace-archive.json","Cache-Control":"no-store"}});}

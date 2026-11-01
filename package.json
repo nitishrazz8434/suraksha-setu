@@ -1,6 +1,6 @@
 {
   "name": "suraksha-setu",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "private": true,
   "engines": {
     "node": ">=22.13.0"
@@ -15,11 +15,14 @@
     "test": "node scripts/test.mjs",
     "typecheck": "tsc --noEmit",
     "db:migrate:local": "node scripts/migrate-local.mjs",
-    "test:api": "node tests/api.integration.mjs"
+    "test:api": "node tests/api.integration.mjs",
+    "test:models": "node scripts/model-smoke.mjs",
+    "test:models:extended": "node scripts/model-smoke.mjs --extended"
   },
   "dependencies": {
     "@base-ui/react": "^1.7.0",
     "@hookform/resolvers": "^5.7.1",
+    "@huggingface/transformers": "^3.8.1",
     "@shadcn/react": "^0.3.0",
     "class-variance-authority": "0.7.1",
     "clsx": "2.1.1",
@@ -27,6 +30,7 @@
     "date-fns": "^4.4.0",
     "drizzle-orm": "0.45.2",
     "embla-carousel-react": "^8.6.0",
+    "glpk.js": "^5.0.0",
     "input-otp": "^1.4.2",
     "lucide-react": "^1.31.0",
     "next": "16.3.4",

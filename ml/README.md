@@ -1,28 +1,44 @@
-# Research pipelines
+# Model extensions
 
-These scripts implement training and inference, not pre-trained domain claims. They were syntax-checked in the authoring environment; GPU training and full Python dependency installation were not performed. Run a small end-to-end dataset smoke test on the intended training environment before a large experiment.
+The main application already runs six pretrained browser models for images, classification, retrieval and generation; see the root README. These Python pipelines support additional domain-specific training and authenticated inference.
 
-`common.py` enforces event-disjoint train/validation/test splits. Selection uses validation data; test metrics are computed after loading the selected checkpoint. CSV classification predictions can be imported into Research studio.
+The Python source was syntax-checked during authoring. Its full dependency installation, GPU training and domain benchmark runs have not been performed. Run a small end-to-end dataset test on the intended compute environment before a large training run.
 
-| Script | Inputs | Output |
-| --- | --- | --- |
-| train_vision.py | RGB imagery; binary masks, image labels or aligned before/after crops | Best checkpoint, validation history, test IoU/Dice or classification metrics |
-| train_text.py | Labelled reports | TF-IDF, BiLSTM or BERT, test CSV and per-class metrics |
-| train_multimodal.py | Paired image/text with aligned target labels | Separately trained image-only, text-only or gated-fusion model |
-| train_summarizer.py | Source text and reference summary | T5 checkpoint, test ROUGE and generated summaries |
-| train_detector.py | YOLO-compatible dataset YAML | Detector weights and test mAP |
-| clip_retrieval.py | An image and candidate captions | Relative image-text similarity ranking |
-| prepare_manifest.py | Annotated CSV with event names | JSONL manifest with explicit holdout events |
-| service.py | Locally trained compatible checkpoints | Authenticated image, text and grounded summarization endpoints |
+## Setup
 
-The model server loads only local checkpoints. It does not silently download arbitrary weights. Training commands may download the explicitly selected pretrained base encoder from its model publisher.
+```sh
+python -m venv .venv
+# Activate the environment, then:
+pip install -r ml/requirements.txt
+```
 
-Use `MODEL_DIR` for the model folder and `ML_SERVICE_TOKEN` for bearer authentication. Bind to loopback for local work. Remote hosting requires TLS and a token. Checkpoints are deployment assets, not user-uploaded inputs; never load untrusted pickle files into the service.
+Every JSONL manifest row needs split (train, val or test) and event. Event identifiers must be disjoint across splits; relative image paths resolve against the manifest directory.
 
-Vision service tasks: segmentation, damage, detection, gradcam. Text service loads BERT if configured, otherwise BiLSTM, otherwise TF-IDF. The assistant's T5 output receives a simple numerical consistency check; this does not establish full factuality. The TypeScript application falls back to calculated context if the service is missing or fails.
+| Script | Input and output |
+| --- | --- |
+| train_vision.py | RGB images with masks/labels/aligned pairs; segmentation or classification checkpoints and metrics |
+| train_text.py | Labelled reports; TF-IDF, BiLSTM or BERT with per-class test results |
+| train_multimodal.py | Paired image/text with matching labels; image, text or fusion model |
+| train_summarizer.py | Source text and reference summary; T5 checkpoint and test outputs |
+| train_detector.py | YOLO dataset YAML; detector weights and test mAP |
+| clip_retrieval.py | Image and descriptions; relative similarity ranking |
+| prepare_manifest.py | Annotated CSV and held-out events; split JSONL |
+| service.py | Local compatible checkpoints; authenticated inference endpoints |
 
-Sensor alignment, label conventions and image normalization must match across training and inference. Building damage requires aligned building crops. An image-level classifier's heatmap does not establish structural habitability. Classification softmax outputs are model scores, not automatically calibrated probabilities.
+```sh
+python ml/train_vision.py data/flood.jsonl --task segmentation --output models/segmentation
+python ml/train_text.py data/reports.jsonl --model bert --output models/text
+python ml/train_multimodal.py data/paired.jsonl --mode fusion --output models/fusion
+python ml/train_summarizer.py data/summaries.jsonl --output models/summarizer
+uvicorn ml.service:app --host 127.0.0.1 --port 8000
+```
 
-Do not combine unrelated dataset samples as if they share an event, location or time. Pair modalities using their original dataset identifiers. Keep all pre/post pairs, duplicate posts and neighboring tiles in the same event split. For a multimodal comparison, train each mode separately with the same splits and comparable budgets.
+Binary segmentation masks use 0=land, 1=water and 255=ignore. Optical RGB and radar require different preprocessing. Before/after damage inputs must be aligned. Keep all pairs, duplicates and nearby tiles within one event split. Evaluate each modality on comparable splits and budgets.
 
-Useful evaluation: pixel IoU/Dice, class macro-F1, span-F1 for separately annotated NER, mAP for detection, ROUGE plus human factuality review, inference latency and calibration. The current rule extractor has no learned NER checkpoint; its limitations are visible in the UI.
+Use MODEL_DIR for checkpoints and ML_SERVICE_TOKEN for bearer authentication. The service loads local compatible checkpoints rather than arbitrary user uploads. Never load untrusted pickle files. The detector adapter additionally needs ultralytics and its applicable licensing.
+
+For the existing optional API bridge, configure ML_SERVICE_URL and ML_SERVICE_TOKEN as server-side values in ignored .dev.vars locally or hosted runtime secrets. A hosted Worker cannot reach a user's localhost. Hosted services need authenticated HTTPS. Browser model inference does not require this Python service.
+
+Report measured pixel IoU/Dice, class macro-F1, detector mAP, ROUGE with factuality review and inference latency as appropriate. Scene masks, heatmaps and similarity scores do not establish structural habitability or calibrated hazard probabilities.
+
+Useful domain data references: [Sen1Floods11](https://github.com/cloudtostreet/Sen1Floods11), [xView2](https://www.sei.cmu.edu/projects/xview-2-challenge/) and [CrisisMMD](https://crisisnlp.qcri.org/crisismmd). Check each dataset's access and reuse terms.

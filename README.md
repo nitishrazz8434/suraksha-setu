@@ -1,10 +1,10 @@
 # SurakshaSetu
 
-An integrated academic disaster-intelligence and relocation-planning project for **CSE471: Deep Learning for Computer Vision** and **CSE472: Deep Learning for NLP**. Based on problem statement 2619: hazard-based candidate red zones, carrying capacity and vulnerable-habitation relocation needs.
+Multi-district disaster intelligence, resource assessment and household relocation management. A connected application with durable account-scoped records, geospatial evidence, pretrained image and language models, constrained allocation and confirmed movement tracking.
 
-## Run the application
+## Start locally
 
-Requirements: Node.js 22.13+ and npm. From this directory:
+Requires Node.js 22.13 or newer and npm.
 
 ```sh
 npm ci
@@ -13,106 +13,71 @@ npm run db:migrate:local
 npm run dev
 ```
 
-Open the Local URL printed by the server (normally http://127.0.0.1:5173). The development server supports local workshop identity; hosted requests use the platform's authenticated user identity. Database and file storage are local in development and separate from the hosted database.
+Open the Local URL printed by the server, normally http://127.0.0.1:5173. Local development identity and storage are separate from hosted accounts. Keep `.wrangler/state` to retain local records. Hosted access uses platform sign-in and account-scoped D1/R2 storage.
+
+The application starts with empty registers. Add districts, settlements, actual households and reviewed sites through **Data register**, or import CSV files using the blank column templates downloaded there. Import hazard footprints as GeoJSON with source and observation time. See [Operations guide](docs/OPERATIONS.md) for the complete workflow.
+
+## Included workflows
+
+| Area | Working capabilities |
+| --- | --- |
+| Multi-district management | District scope selection, settlements, variable-sized households, sites, provenance, CSV import/export and validated references |
+| Risk map | Registered locations, uploaded Polygon/MultiPolygon evidence, expired/unverified layer styling, map/satellite basemaps and measured road routes |
+| Incidents | English/Hindi extraction, neural classification, photo evidence, duplicate candidates, verification, linked closures, voice input and field tasks |
+| Site resources | Space/water/sanitation bottlenecks, actual occupancy, reservations, accessibility, medical support and longer-term site reviews |
+| Relocation | GLPK mixed-integer allocation of whole households, cross-district opt-in, route freshness and hazard checks, review, approval, movement and arrival confirmation |
+| Scenarios | Water constraints, site/route exclusions, emergency/longer-term purpose, cross-district access and calculated comparisons |
+| Image intelligence | SegFormer scene masks, YOLOS detections, CLIP image-text ranking and aligned image comparison on user uploads |
+| Copilot | Calculated workspace answers, multilingual semantic retrieval, FLAN-T5 generation with supplied evidence, numerical guard and source passages |
+| Documents and reporting | PDF/text ingestion, operations briefs, print/PDF, allocation CSV, backup/restore and activity history |
+| Reliability | Optimistic revisions, unsaved-edit outbox, conflict rejection, authoritative plan actions, isolated evidence files and legacy recovery |
+
+No population, incident, capacity, hazard footprint or route is preloaded into operational registers. Missing evidence remains **Unassessed**. Only verified, unexpired hazard evidence contributes to assessment; model outputs require explicit incident review.
+
+## Neural inference
+
+Models execute on the device in a WebAssembly worker using Transformers.js. First use downloads public pretrained weights from Hugging Face; subsequent use can reuse browser cache. No inference API key is required.
+
+| Model | Task | Interpretation |
+| --- | --- | --- |
+| [MobileBERT MNLI](https://huggingface.co/Xenova/mobilebert-uncased-mnli) | English zero-shot report classification | Suggested categories for review |
+| [Multilingual MiniLM](https://huggingface.co/Xenova/paraphrase-multilingual-MiniLM-L12-v2) | Semantic retrieval and Hindi report matching | Cosine similarity, not calibrated event probability |
+| [SegFormer B0 ADE20K](https://huggingface.co/Xenova/segformer-b0-finetuned-ade-512-512) | Scene segmentation | General scene classes; masks do not establish flood depth or structural safety |
+| [YOLOS Tiny](https://huggingface.co/Xenova/yolos-tiny) | Object detection | General COCO categories |
+| [CLIP](https://huggingface.co/Xenova/clip-vit-base-patch32) | Image-text ranking | Relative similarity to candidate descriptions |
+| [FLAN-T5 Small](https://huggingface.co/Xenova/flan-t5-small) | Evidence-assisted generation | Review against the visible calculated evidence and source text |
+
+Browser memory, network access and device speed affect loading. Switching tasks disposes the previous model to bound memory. General predictions are not automatically converted into verified hazard designations.
+
+## Allocation and capacity
+
+- Each household has its own size. Binary variables prevent splitting it across sites.
+- Capacity is the applicable minimum of space, water, sanitation and sustainable limits, minus occupancy and outstanding reservations.
+- The first optimization maximizes allocated people. A second holds coverage fixed, ranks reviewed priorities and assistance needs, then prefers lower measured travel time. Time-limited feasible solutions are labelled accordingly.
+- Unverified, inactive or unreviewed sites are excluded. Assistance and medical requirements are eligibility constraints. Longer-term sites additionally require land, environment, services and sustainable-capacity reviews.
+- Roads come from OSRM or registered survey/provider geometry. There is no invented straight-line routing fallback. Routes expire after 24 hours and are checked against verified closures and intersecting high-severity hazards.
+- Approval checks current inputs and reservations. Server actions enforce movement state and increment occupancy exactly once per confirmed arrival.
+
+OSRM defaults to https://router.project-osrm.org. Set server-side `ROUTING_URL` to a compatible routing host when needed. Provider availability and road data coverage affect results. Map attribution appears in the interface: OpenStreetMap contributors and Esri imagery providers.
+
+## Storage and recovery
+
+D1 stores owner-scoped revision pointers; immutable JSON workspace objects and evidence live in R2. Atomic revision checks reject stale writes. The client retains unsaved changes after connection loss and stops on conflicts or rejected writes. Export the unsaved draft before reloading a conflicted session. The outbox requires an already-loaded session; the application is not a fully offline map package.
+
+The previous workspace format is archived before an empty current-format workspace opens. Download it from **Workspace settings**. Current backups can be exported/restored through **Reports & documents**. Backup JSON contains register/document data; image evidence remains in its originating account's object storage.
+
+## Verification
 
 ```sh
 npm run typecheck
 npm test
+# Against the local development server:
+npm run test:api
+# Actual pretrained inference; downloads model weights:
+npm run test:models
+npm run test:models:extended
 ```
 
-If working with the original development checkout, the first SQL migration is already applied locally. The migration helper tracks applied files to avoid reapplying them. Keep `.wrangler/state` for local persistence. Do not commit its contents.
+Set `RUN_ROUTING_SMOKE=1` to include external OSRM verification in `test:api`. Test records use isolated development identities and never populate the normal workspace. See [Validation](docs/VALIDATION.md) and [Architecture](docs/ARCHITECTURE.md).
 
-## Working application
-
-| Surface | Functionality |
-| --- | --- |
-| Overview | Calculated exposure, capacity, allocation coverage, priorities and activity |
-| Risk map | Pan/zoom, map/satellite basemaps, hazard layers, site markers, route overlays and settlement inspection |
-| Incident reports | Text/voice entry, English/Hindi rule extraction, duplicate candidates, image uploads and verification/resolution |
-| Sites & capacity | Editable resource limits, occupancy, assisted access and longer-term screening eligibility |
-| Relocation planning | Integer min-cost maximum flow, shortest paths, household cohesion, assisted-site eligibility, drafts/approvals and logistics arithmetic |
-| Scenario lab | Road/site exclusions, water/demand adjustments, baseline/optimized/greedy comparisons and JSON exports |
-| Copilot | Calculated evidence responses, source labels, document passage retrieval, Hindi briefs, voice playback and optional checkpoint-assisted summarization |
-| Reports & evidence | Text briefs, browser print-to-PDF, allocation CSV, PDF/text document ingestion, backups and an activity history |
-| Vision workbench | Actual RGB heuristic mask, sensitivity controls, synthetic-ground-truth IoU, uploaded-image processing and checkpoint inference connector |
-| Research studio | Syllabus mapping, provenance, methods and computed classification metrics/confusion matrices from uploaded predictions |
-
-Owner-scoped D1 persistence uses optimistic revision checks. R2 image uploads are scoped to a hashed owner identifier. An offline outbox queues edits after the workspace has loaded; synchronization conflicts stop automatic overwrites.
-
-## What the data and models mean
-
-**The initial Wayanad scenario is synthetic.** Town names and basemap geography are real; populations, resource records, hazard indicators, road links and incident reports are illustrative exercise inputs. The project is not an operational disaster advisory or an official red-zone designation.
-
-**The default runtime does not pretend to contain trained deep-learning weights.** Flood-colour segmentation is a labelled RGB heuristic; local extraction is a rule baseline; local copilot answers use deterministic calculations and extractive retrieval. The source includes real training and inference code for U-Net/DeepLab, ResNet transfer learning, paired damage assessment, TF-IDF, BiLSTM, BERT, multimodal fusion, T5 summarization, YOLO and CLIP experiments. Dataset access, training compute, checkpoints and held-out results must be supplied before making trained-model performance claims. No benchmark scores are invented.
-
-## Train and connect research models
-
-Use Python 3.11+ in a dedicated virtual environment:
-
-```sh
-python -m venv .venv
-# Windows PowerShell
-.\.venv\Scripts\Activate.ps1
-pip install -r ml/requirements.txt
-```
-
-Manifest JSONL records use `split` (`train`, `val`, `test`) and `event` on every row. Events must be disjoint across splits. Relative image paths resolve against the manifest directory. Formats:
-
-```json
-{"text":"A labelled field report", "label":"Flood", "event":"event-a", "split":"train"}
-{"image":"images/tile.png", "mask":"masks/tile.png", "event":"event-b", "split":"val"}
-{"image":"images/after.png", "reference":"images/before.png", "label":"major-damage", "event":"event-c", "split":"test"}
-```
-
-Segmentation masks are single-channel `0=land`, `1=water`, `255=ignore`. RGB checkpoints accept optical RGB [0,1] images. Sentinel-1 radar and Sentinel-2 optical channels require different preprocessing; do not interchange them.
-
-```sh
-python ml/train_vision.py data/flood.jsonl --task segmentation --output models/segmentation
-python ml/train_vision.py data/flood.jsonl --task segmentation --architecture deeplab --pretrained --output experiments/deeplab
-python ml/train_vision.py data/images.jsonl --task classification --pretrained --output models/classification
-python ml/train_vision.py data/damage.jsonl --task damage --pretrained --output models/damage
-python ml/train_text.py data/reports.jsonl --model tfidf --output experiments/tfidf
-python ml/train_text.py data/reports.jsonl --model bilstm --output experiments/bilstm
-python ml/train_text.py data/reports.jsonl --model bert --output models/text
-python ml/train_multimodal.py data/paired.jsonl --mode fusion --output models/fusion
-python ml/train_multimodal.py data/paired.jsonl --mode image --output experiments/image-only
-python ml/train_multimodal.py data/paired.jsonl --mode text --output experiments/text-only
-python ml/train_summarizer.py data/summaries.jsonl --output models/summarizer
-uvicorn ml.service:app --host 127.0.0.1 --port 8000
-```
-
-Summarization manifests additionally need a human-written `summary`. The optional YOLO adapter needs `pip install ultralytics` and a dataset YAML; see the upstream package's licensing. The separate CLIP script ranks supplied captions. See `ml/README.md` for evaluation details.
-
-For local model integration, put the following names in an ignored `.dev.vars` file; use your own random service token in both processes:
-
-```text
-ML_SERVICE_URL=http://127.0.0.1:8000
-ML_SERVICE_TOKEN=your-own-random-service-token
-```
-
-Set `ML_SERVICE_TOKEN` on the Python process too. For hosted integration, use an authenticated HTTPS inference service and configure these values as server-side runtime secrets. The hosted Worker cannot reach the user's localhost. Never put tokens in browser code, Git or the hosting manifest.
-
-## Planning assumptions
-
-- A planning household contains exactly four people. Assisted/general cohorts preserve these units. This assumption must be replaced with variable-sized household records for real deployments.
-- Capacity is `max(0, min(space, water × scenario factor, sanitation) − occupancy)`, rounded down to whole households for allocation.
-- The allocator maximizes feasible coverage. Among maximum-flow solutions, it minimizes a cost combining risk, assisted-cohort priority and exposure-weighted route distance. This is not a claim of lexicographically maximizing every fairness objective.
-- Road lengths are illustrative geodesic lengths × 1.25, not live road travel times. Only verified, unresolved linked closures affect routing.
-- Risk is an interpretable weighted indicator score plus a capped verified-incident severity contribution, not a probability or forecast. Scenario intensity does not model rainfall-runoff or landslide physics.
-- Longer-term allocation is preliminary screening against declared site eligibility and current resource assumptions. Land, legal, environmental and sustainable-service assessments need verified external evidence.
-- Approving or completing a plan records workflow status. Actual movements and occupancy require field confirmation.
-
-## Architecture and academic submission
-
-See [Architecture](docs/ARCHITECTURE.md), [Project proposal](docs/PROJECT_PROPOSAL.md), [Demonstration](docs/DEMO.md) and [Research models](ml/README.md). The code uses React, TypeScript and Vinext, a Cloudflare Worker API, D1 storage and R2 uploads; Python is an independent research/inference service.
-
-## Data sources and attribution
-
-- [Sen1Floods11](https://github.com/cloudtostreet/Sen1Floods11): georeferenced flood imagery and labels.
-- [xBD / xView2](https://www.sei.cmu.edu/projects/xview-2-challenge/): before/after building imagery and damage annotations.
-- [CrisisMMD](https://crisisnlp.qcri.org/crisismmd): paired crisis text and images.
-- [GSI Bhusanket](https://bhusanket.gsi.gov.in/): regional landslide information.
-- [WorldPop](https://www.worldpop.org/datacatalog/): population estimates.
-- Basemaps: OpenStreetMap contributors; satellite tiles: Esri and imagery providers. These are network services; the map retains a clearly illustrative background if tiles are unavailable.
-
-Access and reuse terms vary by dataset. Use event/geography holdouts, document provenance, and report real evaluation results with their limitations.
+Additional Python pipelines support domain-specific model development independently of the working browser models; see [Model extensions](ml/README.md). Dataset licensing, event-disjoint validation and measured performance are necessary before domain-specific forecasting or safety claims.
