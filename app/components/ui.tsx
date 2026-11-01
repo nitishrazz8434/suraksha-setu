@@ -1,0 +1,15 @@
+"use client";
+import {X,ArrowUpRight,CheckCircle2,AlertCircle,Download} from "lucide-react";
+import type {ReactNode} from "react";
+export function Badge({children,tone="neutral"}:{children:ReactNode;tone?:string}){return <span className={`badge ${tone}`}><i/>{children}</span>;}
+export function Button({children,onClick,variant="secondary",disabled=false,type="button",className=""}:{children:ReactNode;onClick?:()=>void;variant?:string;disabled?:boolean;type?:"button"|"submit";className?:string}){return <button type={type} className={`btn ${variant} ${className}`} onClick={onClick} disabled={disabled}>{children}</button>;}
+export function Card({children,className=""}:{children:ReactNode;className?:string}){return <section className={`card ${className}`}>{children}</section>;}
+export function CardHead({title,subtitle,action}:{title:string;subtitle?:string;action?:ReactNode}){return <div className="card-head"><div><h3>{title}</h3>{subtitle&&<p>{subtitle}</p>}</div>{action}</div>;}
+export function Empty({title,text,action}:{title:string;text:string;action?:ReactNode}){return <div className="empty"><CheckCircle2 size={32}/><h3>{title}</h3><p>{text}</p>{action}</div>;}
+export function Modal({title,subtitle,children,onClose,wide=false}:{title:string;subtitle?:string;children:ReactNode;onClose:()=>void;wide?:boolean}){return <div className="modal-backdrop" onClick={onClose}><section className={`modal ${wide?"wide":""}`} role="dialog" aria-modal="true" aria-label={title} onClick={e=>e.stopPropagation()}><header><div><h2>{title}</h2>{subtitle&&<p>{subtitle}</p>}</div><button className="icon-btn" aria-label="Close dialog" onClick={onClose}><X size={20}/></button></header>{children}</section></div>;}
+export function PageTitle({eyebrow,title,description,action}:{eyebrow?:string;title:string;description:string;action?:ReactNode}){return <div className="page-title"><div>{eyebrow&&<div className="eyebrow">{eyebrow}</div>}<h1>{title}</h1><p>{description}</p></div><div className="page-actions">{action}</div></div>;}
+export function Notice({children,tone="info"}:{children:ReactNode;tone?:string}){return <div className={`notice ${tone}`}><AlertCircle size={17}/><div>{children}</div></div>;}
+export function download(name:string,content:string,type="text/plain"){const url=URL.createObjectURL(new Blob([content],{type})),a=document.createElement("a");a.href=url;a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(url),2000);}
+export function ExportButton({name,content,label="Export"}:{name:string;content:string;label?:string}){return <Button onClick={()=>download(name,content)}><Download size={15}/>{label}</Button>;}
+export function LinkAction({children,onClick}:{children:ReactNode;onClick:()=>void}){return <button className="link-action" onClick={onClick}>{children}<ArrowUpRight size={15}/></button>;}
+export const tone=(label:string)=>({Critical:"red",High:"orange",Moderate:"amber",Low:"green",Verified:"green",Pending:"amber",Resolved:"neutral",Draft:"neutral",Approved:"green","In progress":"blue",Completed:"green"}[label]??"neutral");
