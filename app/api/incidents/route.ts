@@ -1,0 +1,5 @@
+import {requireAccount,mutationGuard} from "../../../lib/auth";
+import {visibleReports} from "../../../lib/access";
+import {createReport,reviewReport} from "../../../lib/incidents";
+export async function GET(request:Request){const user=await requireAccount(request);if(user instanceof Response)return user;return Response.json({reports:await visibleReports(user)},{headers:{"Cache-Control":"no-store"}});}
+export async function POST(request:Request){const guard=mutationGuard(request);if(guard)return guard;const user=await requireAccount(request);if(user instanceof Response)return user;try{const raw=await request.text();if(raw.length>50000)return Response.json({error:"Report is too large"},{status:413});const body=JSON.parse(raw);if(body.action==="create")return Response.json({report:await createReport(user,body.report)},{status:201});const result=await reviewReport(user,body);if("conflict" in result)return Response.json({error:"Another reviewer updated this report. Refresh and review the latest version."},{status:409});return Response.json(result);}catch(e){return Response.json({error:(e as Error).message},{status:400});}}

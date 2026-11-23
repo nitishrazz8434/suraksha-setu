@@ -4,7 +4,7 @@ import {catalog} from "../../../lib/catalog";
 import type {Forecast} from "../../../lib/connected-types";
 import {weatherUrl,decodeForecast,unavailableForecast} from "../../../lib/weather";
 export async function GET(request:Request){
- const user=owner(request);if(user instanceof Response)return user;
+ const user=await owner(request);if(user instanceof Response)return user;
  const {workspace}=await readWorkspace(user),districts=workspace.districts.length?workspace.districts:catalog.profiles;
  const ids=new URL(request.url).searchParams.get("ids")?.split(",");
  const selected=districts.filter(d=>!ids||ids.includes(d.id)).slice(0,10);

@@ -1,0 +1,86 @@
+{
+  "description": "Manually authored diagnostic cases, frozen before the first evaluation. Single dominant label per case; not independently annotated or a representative field benchmark. Hindi cases separately expose the English classifier's language limitation.",
+  "labels": ["flood or inundation", "landslide or slope failure", "damaged or blocked infrastructure", "request for food, water or shelter", "medical assistance", "unrelated information"],
+  "english": {
+    "flood or inundation": [
+      "The river has overflowed and water is entering the houses.",
+      "Our ground floor is submerged after overnight rain.",
+      "Water from the canal has spread across the neighbourhood.",
+      "The village is under water after the embankment overflowed.",
+      "Waist-deep water surrounds the homes beside the river.",
+      "Heavy rain has caused waterlogging throughout the residential area.",
+      "The stream burst its banks and inundated the settlement.",
+      "Several streets are underwater and water levels are rising.",
+      "Brown river water is flowing through the courtyard and rooms.",
+      "Water has entered twenty houses; there is no slope movement."
+    ],
+    "landslide or slope failure": [
+      "Soil and rocks are sliding down the hillside behind our homes.",
+      "A large section of the slope collapsed this morning.",
+      "Mud is moving downhill and trees are tilting on the slope.",
+      "The rain-soaked hillside has slipped towards the village.",
+      "Boulders and loose earth are falling from the mountain.",
+      "Cracks widened before a mass of earth slid off the hill.",
+      "A mudslide has buried part of the settlement.",
+      "The ground on the steep slope is giving way.",
+      "Wet soil has detached from the hillside and is moving downhill.",
+      "There is no river flooding, but the slope above the houses has failed."
+    ],
+    "damaged or blocked infrastructure": [
+      "The bridge has collapsed and vehicles cannot cross.",
+      "A fallen tree is blocking the main road.",
+      "The power lines have snapped and the electricity poles are down.",
+      "A large crack has made the village road impassable.",
+      "The water supply pipe has burst beneath the street.",
+      "The only access bridge is damaged and closed to traffic.",
+      "A retaining wall has fallen across the road.",
+      "The road surface has washed away and buses cannot pass.",
+      "The mobile tower is damaged and local communications have stopped.",
+      "No flooding is visible, but the bridge deck is broken."
+    ],
+    "request for food, water or shelter": [
+      "We have run out of drinking water and need clean water delivered.",
+      "Please send food packets for the families staying here.",
+      "Our family needs temporary accommodation for tonight.",
+      "The shelter has no meals left for the children.",
+      "We need blankets and a dry place to sleep.",
+      "Please arrange drinking water and cooked meals at the camp.",
+      "Twenty families need emergency shelter and basic supplies.",
+      "There is no safe drinking water available in our locality.",
+      "Can you provide tents for the families sleeping outdoors?",
+      "Nobody is injured, but we urgently need food and clean water."
+    ],
+    "medical assistance": [
+      "An injured person is bleeding heavily and needs an ambulance.",
+      "A child is struggling to breathe and needs urgent medical care.",
+      "Please send a doctor to treat the injured residents.",
+      "An elderly patient has chest pain and needs transport to hospital.",
+      "A resident has a broken leg and needs immediate treatment.",
+      "We need insulin for a diabetic patient at the camp.",
+      "A woman has fainted and requires medical attention.",
+      "The patient has severe dehydration and needs a medical team.",
+      "Please arrange an ambulance for a person with serious burns.",
+      "Food and water are available, but an injured child needs a doctor."
+    ],
+    "unrelated information": [
+      "The college football match starts at four this afternoon.",
+      "Please tell me the opening hours of the library.",
+      "I bought a new notebook for my mathematics class.",
+      "The school annual day programme is next Friday.",
+      "My online shopping order arrived this morning.",
+      "Which movie is playing at the cinema this weekend?",
+      "The restaurant has added a new dessert to its menu.",
+      "I would like to book tickets for a music concert.",
+      "Our computer laboratory examination is on Monday.",
+      "This is a routine message about tomorrow's staff meeting."
+    ]
+  },
+  "hindi": {
+    "flood or inundation": ["नदी का पानी घरों में घुस गया है और पूरा मोहल्ला डूब रहा है।", "लगातार बारिश से गांव की गलियों में बाढ़ का पानी भर गया है।"],
+    "landslide or slope failure": ["पहाड़ की मिट्टी और पत्थर खिसककर गांव की तरफ आ रहे हैं।", "बारिश के बाद पहाड़ी पर भूस्खलन हुआ है।"],
+    "damaged or blocked infrastructure": ["गांव का पुल टूट गया है और यातायात बंद है।", "सड़क पर पेड़ गिर गया है और कोई वाहन नहीं निकल सकता।"],
+    "request for food, water or shelter": ["हमें पीने का पानी और खाने के पैकेट चाहिए।", "बीस परिवारों के लिए रात में रहने का आश्रय चाहिए।"],
+    "medical assistance": ["एक घायल व्यक्ति को तुरंत एम्बुलेंस और डॉक्टर चाहिए।", "बच्चे को सांस लेने में तकलीफ है, तुरंत चिकित्सा सहायता भेजें।"],
+    "unrelated information": ["कल कॉलेज में क्रिकेट का मैच है।", "मुझे पुस्तकालय के खुलने का समय बताइए।"]
+  }
+}

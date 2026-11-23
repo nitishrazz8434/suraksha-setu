@@ -6,6 +6,8 @@ Every facility links to its individual Kerala KITE Sametham record. Census 2011 
 
 Open-Meteo provides current model conditions and seven-day daily forecasts at district reference coordinates. The browser retrieves public forecasts directly and caches them for fifteen minutes with observation time. The optional server endpoint uses R2 caching and a retry interval on provider failures. Unavailable feeds retain explicitly marked cached data or show unavailable values. Rainfall bands are screening heuristics over the next three days: below 15, 15–35, 35–65 and at least 65 mm/day. They are not official warning categories or validated flood/landslide probabilities.
 
+The map offers an optional Wayanad landslide susceptibility case study. Its 269 polygons are from the KSDMA-distributed NCESS 2010 KML layer (110 High, 149 Medium, 10 Low). The local GeoJSON is a geometry conversion of that reference file. It is separated from workspace incident reports and does not affect operational risk or route calculations. See the KSDMA [maps page](https://sdma.kerala.gov.in/maps/) for source and classification context. This older baseline is for demonstration and geographic context, not current conditions.
+
 ## Preparedness allocation
 
 The connected planner calculates immediately using visible defaults:
@@ -36,4 +38,4 @@ Use the Registered household movements tab for actual variable-sized household r
 
 The neural worker is built as a standalone browser ESM asset before development/build. This avoids framework rewrites of browser/worker detection and file-URL worker construction. Runtime assets are packaged locally. Real public weights load on first use and can reuse browser cache.
 
-Image intelligence includes an attributed historical Wayanad photograph for immediate analysis. Model results do not turn it into a current incident. Generated overlays from this reference retain its CC BY-SA 4.0 attribution. Copilot shows calculated evidence immediately while optional neural wording runs, with source evidence kept available.
+Image intelligence includes an attributed historical Wayanad photograph for immediate analysis. Model results do not turn it into a current incident. Generated overlays from this reference retain its CC BY-SA 4.0 attribution. The default Disaster scene assessment combines a pretrained image captioner with zero-shot CLIP comparisons across disaster and ordinary-scene descriptions. It presents a plain-language caption, relative category match, general precautions, and—when the operator selects the photo district—current rainfall-screen and active verified workspace records. It does not calculate disaster probabilities from images. Rain probability is shown only as precipitation probability. Raw output is tucked under technical details; visual differences are not confirmed damage.

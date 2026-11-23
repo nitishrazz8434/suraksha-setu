@@ -28,6 +28,6 @@ export function useMonitoring(districts:District[],ready:boolean):Monitoring{
    setForecasts(results);setError(results.some(f=>f.error)?"Some weather feeds are unavailable. Cached observations retain their original source times.":"");
   }catch(e){setError((e as Error).message);}finally{inFlight.current=false;setLoading(false);}
  },[points,ready]);
- useEffect(()=>{void refresh();const timer=setInterval(()=>void refresh(),15*60000);return()=>clearInterval(timer);},[refresh]);
+ useEffect(()=>{const initial=window.setTimeout(()=>void refresh(),0),timer=window.setInterval(()=>void refresh(),15*60000);return()=>{window.clearTimeout(initial);window.clearInterval(timer);};},[refresh]);
  return{forecasts,loading,error,refresh};
 }

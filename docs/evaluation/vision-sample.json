@@ -1,0 +1,443 @@
+{
+  "dataset": "QCRI/DisasterVQA",
+  "revision": "f341ce34814a93bad8abfe73da898a309116a59e",
+  "split": "Published annotations; no held-out split claimed",
+  "license": "Dataset card: CC-BY-SA-4.0. Underlying sources retain their attribution and terms; images are not redistributed.",
+  "source": "https://huggingface.co/datasets/QCRI/DisasterVQA",
+  "perClass": 12,
+  "sampling": "First 12 unique paths per supported class in SHA256(seed + imagePath) order, fixed before inference. wildfire maps to fire. No image is repeated for multiple questions. Unsupported disaster labels and inconsistent image labels are excluded. All nine application candidate descriptions remain eligible predictions.",
+  "annotationSha256": "6e9e7f49de37975992c7a0d2b4908493c5eb335f3b90dc047fbc1abbedceac00",
+  "uniqueImages": 1395,
+  "conflictingLabelsExcluded": [
+    "DisasterVQA/CrisisMMD/904572280981790720_1.jpg"
+  ],
+  "availableByClass": {
+    "earthquake": 427,
+    "flood": 288,
+    "hurricane": 264,
+    "fire": 192,
+    "landslide": 52
+  },
+  "samples": [
+    {
+      "imageId": "img-374",
+      "label": "earthquake",
+      "imagePath": "DisasterVQA/MEDIC/ecuador_eq_severe_im_315.png",
+      "sourceDataset": "medic",
+      "imageSha256": "5a0af25564edf72c257d63ef14cd02b7b5dc0476e2fde24296ed7caf93f294d7"
+    },
+    {
+      "imageId": "img-582",
+      "label": "earthquake",
+      "imagePath": "DisasterVQA/MEDIC/792976020928393216_1.jpg",
+      "sourceDataset": "medic",
+      "imageSha256": "013e53c7cb327a180114be9381aa139f4beb1950adc54fe256dfab193d7a3cc2"
+    },
+    {
+      "imageId": "img-424",
+      "label": "earthquake",
+      "imagePath": "DisasterVQA/MEDIC/building_damage_1991.jpg",
+      "sourceDataset": "medic",
+      "imageSha256": "3cde0641dfc4a68afd31fe1dde42ad3f07ae358f68c3b5e4c614b27c0401bd14"
+    },
+    {
+      "imageId": "img-467",
+      "label": "earthquake",
+      "imagePath": "DisasterVQA/MEDIC/road_damage_3043.jpg",
+      "sourceDataset": "medic",
+      "imageSha256": "8b55c3123c82b69ef767f65331da1216b571b0dfd9041236c45baa8d59abf7af"
+    },
+    {
+      "imageId": "img-562",
+      "label": "earthquake",
+      "imagePath": "DisasterVQA/MEDIC/593762122179420160_0.jpg",
+      "sourceDataset": "medic",
+      "imageSha256": "b625eee6b1aef78367e837446e0985e9bec60e9667886a3b8b09a75cc6cb695f"
+    },
+    {
+      "imageId": "img-571",
+      "label": "earthquake",
+      "imagePath": "DisasterVQA/MEDIC/797839629072220160_0.jpg",
+      "sourceDataset": "medic",
+      "imageSha256": "5eea83acf560ad86b8e3f8ec1daa67cf2e2f9f633823c83b7480a667b3821d86"
+    },
+    {
+      "imageId": "img-359",
+      "label": "earthquake",
+      "imagePath": "DisasterVQA/MEDIC/ecuador_eq_severe_im_1951.jpg",
+      "sourceDataset": "medic",
+      "imageSha256": "63621a2b2c29f299b386bfa5702669d72f140568fac51d0e112ef2b8ac3bb754"
+    },
+    {
+      "imageId": "img-346",
+      "label": "earthquake",
+      "imagePath": "DisasterVQA/MEDIC/ecuador_eq_severe_im_1222.jpg",
+      "sourceDataset": "medic",
+      "imageSha256": "800864a00dab042f66d51967ecc53887df6f6d4e2afeabad7fc36dfd6953a702"
+    },
+    {
+      "imageId": "img-546",
+      "label": "earthquake",
+      "imagePath": "DisasterVQA/MEDIC/598155777782652928_0.jpg",
+      "sourceDataset": "medic",
+      "imageSha256": "ad14c6a0cb93289127afef29b1fabb84e0f82c6834f511c7614ed203e990a2e4"
+    },
+    {
+      "imageId": "img-224",
+      "label": "earthquake",
+      "imagePath": "DisasterVQA/MEDIC/591928597528518658_0.jpg",
+      "sourceDataset": "medic",
+      "imageSha256": "b5a49d0bb6474e1d20a318bae8447243da7023ecaf5f59b93501c08736782e17"
+    },
+    {
+      "imageId": "img-486",
+      "label": "earthquake",
+      "imagePath": "DisasterVQA/MEDIC/nepal_eq_severe_im_15019.jpg",
+      "sourceDataset": "medic",
+      "imageSha256": "74718c91cc782f7a6625bc88467c6feb34ac57c1a9627cef9253e9e2a374a5c6"
+    },
+    {
+      "imageId": "img-364",
+      "label": "earthquake",
+      "imagePath": "DisasterVQA/MEDIC/ecuador_eq_severe_im_2238.jpg",
+      "sourceDataset": "medic",
+      "imageSha256": "705742da7d86dafb7164164a3bf70178613ed10a9604ccc1156477b2b00117f0"
+    },
+    {
+      "imageId": "img-896",
+      "label": "flood",
+      "imagePath": "DisasterVQA/CrisisMMD/905552718088900608_0.jpg",
+      "sourceDataset": "crisismmd",
+      "imageSha256": "523b6d785b24012a3a90984171a4794b1a491f81f9244460b52b5c45c06be4ae"
+    },
+    {
+      "imageId": "img-108",
+      "label": "flood",
+      "imagePath": "DisasterVQA/MEDIC/bridge_damage_2241.jpg",
+      "sourceDataset": "medic",
+      "imageSha256": "4d39a2be4f682f0ec968c216db4c5bfa8db4bb3bc0378ca8a6c377e5d93a54cd"
+    },
+    {
+      "imageId": "img-178",
+      "label": "flood",
+      "imagePath": "DisasterVQA/MEDIC/966860767512363008_0.jpg",
+      "sourceDataset": "medic",
+      "imageSha256": "c09e9842721ffc11f0707e5cb25672be3b5b4509056f18ddb318d12f35627a10"
+    },
+    {
+      "imageId": "img-949",
+      "label": "flood",
+      "imagePath": "DisasterVQA/CrisisMMD/908723846735437825_0.jpg",
+      "sourceDataset": "crisismmd",
+      "imageSha256": "2a1071a622a4b828a3f49bf716503f2139e894c52430f75a4f82bae409241bf1"
+    },
+    {
+      "imageId": "img-1159",
+      "label": "flood",
+      "imagePath": "DisasterVQA/Incidents1M/00389_1.jpg",
+      "sourceDataset": "incidents1m",
+      "imageSha256": "78da508fd7a521640206d76077106cfbe21df5742abd38c4d80995fdd623cdfc"
+    },
+    {
+      "imageId": "img-914",
+      "label": "flood",
+      "imagePath": "DisasterVQA/CrisisMMD/904353547025883138_2.jpg",
+      "sourceDataset": "crisismmd",
+      "imageSha256": "fd5000e40291213497a39bf9a677693b45a42526f6e674f67f17bb168cc71542"
+    },
+    {
+      "imageId": "img-1165",
+      "label": "flood",
+      "imagePath": "DisasterVQA/Incidents1M/00006_1.jpg",
+      "sourceDataset": "incidents1m",
+      "imageSha256": "0aafca27a3d28abc3e277096f7a9f5048c5d24638cac313ff6af7b32b1bd9405"
+    },
+    {
+      "imageId": "img-130",
+      "label": "flood",
+      "imagePath": "DisasterVQA/MEDIC/673110855131631616_3.jpg",
+      "sourceDataset": "medic",
+      "imageSha256": "b7d840c96c17b90fa5825b278d79daaa66eb08bd728b6cbe2ea9090a1e9c4f37"
+    },
+    {
+      "imageId": "img-193",
+      "label": "flood",
+      "imagePath": "DisasterVQA/MEDIC/938232969650692096_0.jpg",
+      "sourceDataset": "medic",
+      "imageSha256": "ea04cb4ff62f5421135d338961dae1c1627dc94a269a203fc86e96ee60e440d7"
+    },
+    {
+      "imageId": "img-183",
+      "label": "flood",
+      "imagePath": "DisasterVQA/MEDIC/934440841061449734_0.jpg",
+      "sourceDataset": "medic",
+      "imageSha256": "f0ce81dbd3b142e0f4a0b4c4dbca2f7acdd6f6096a7229dd9ad25ca5428e8e39"
+    },
+    {
+      "imageId": "img-1013",
+      "label": "flood",
+      "imagePath": "DisasterVQA/CrisisMMD/871260385252343808_0.jpg",
+      "sourceDataset": "crisismmd",
+      "imageSha256": "f6d18881183e8cb158dc3964e1a9be316f26620dfb20ee01dc320b74984af476"
+    },
+    {
+      "imageId": "img-187",
+      "label": "flood",
+      "imagePath": "DisasterVQA/MEDIC/979626187390676992_0.jpg",
+      "sourceDataset": "medic",
+      "imageSha256": "92083e62bae74c70bd324701cff6fd0b602076a2ecc7078566bb72b923b83150"
+    },
+    {
+      "imageId": "img-899",
+      "label": "hurricane",
+      "imagePath": "DisasterVQA/CrisisMMD/906158724317937665_0.jpg",
+      "sourceDataset": "crisismmd",
+      "imageSha256": "6fa0a0edbfa30320f3a97beca1e27d393b2d57ce60eb45995c48400c1167b33d"
+    },
+    {
+      "imageId": "img-757",
+      "label": "hurricane",
+      "imagePath": "DisasterVQA/CrisisMMD/912114770710581248_0.jpg",
+      "sourceDataset": "crisismmd",
+      "imageSha256": "72c0052945db2958c056db623f243ed8ec5e8191a85a2a7f3d87d20558c7f00b"
+    },
+    {
+      "imageId": "img-796",
+      "label": "hurricane",
+      "imagePath": "DisasterVQA/CrisisMMD/928140150198153216_0.jpg",
+      "sourceDataset": "crisismmd",
+      "imageSha256": "5c56d1ea6512287a4f6bc918f2bcd18741869062fadc157c7cc2343754721928"
+    },
+    {
+      "imageId": "img-83",
+      "label": "hurricane",
+      "imagePath": "DisasterVQA/MEDIC/978020952742150149_0.jpg",
+      "sourceDataset": "medic",
+      "imageSha256": "42385a8f061b681c3b36a04ce6c54237dd7be45893f6db512f30e534dda2e76f"
+    },
+    {
+      "imageId": "img-61",
+      "label": "hurricane",
+      "imagePath": "DisasterVQA/MEDIC/nepal_eq_severe_im_14624.jpg",
+      "sourceDataset": "medic",
+      "imageSha256": "c732677c864de5b26211dae6b7701cb3aed3b84901a50cf99631453334e9af87"
+    },
+    {
+      "imageId": "img-801",
+      "label": "hurricane",
+      "imagePath": "DisasterVQA/CrisisMMD/928246284791640064_0.jpg",
+      "sourceDataset": "crisismmd",
+      "imageSha256": "8173c2e3f3648a3813b337552db383ee21f49e24090bf0f81c08c23f870eb73e"
+    },
+    {
+      "imageId": "img-60",
+      "label": "hurricane",
+      "imagePath": "DisasterVQA/MEDIC/nepal_eq_mild_im_15118.jpg",
+      "sourceDataset": "medic",
+      "imageSha256": "6081fabe8d54289effb0a73182ef5d98107844b29c52b2060777610b882152a7"
+    },
+    {
+      "imageId": "img-859",
+      "label": "hurricane",
+      "imagePath": "DisasterVQA/CrisisMMD/909738182031413248_0.jpg",
+      "sourceDataset": "crisismmd",
+      "imageSha256": "4c4deca2e2970d70a446a735f6c18ef838bcc4041fa80bec2b960ebe622ca59e"
+    },
+    {
+      "imageId": "img-86",
+      "label": "hurricane",
+      "imagePath": "DisasterVQA/MEDIC/924327451169345538_0.jpg",
+      "sourceDataset": "medic",
+      "imageSha256": "9c0cc8e107d44b6b8bbb28b809212dc709aea97ed5dbc4e7d559da4d2399e5c6"
+    },
+    {
+      "imageId": "img-811",
+      "label": "hurricane",
+      "imagePath": "DisasterVQA/CrisisMMD/917782042473041920_0.jpg",
+      "sourceDataset": "crisismmd",
+      "imageSha256": "1bccfc6c1b9281d5e7c82a28aab03924b99bc529881c4346925d973e7e539cca"
+    },
+    {
+      "imageId": "img-738",
+      "label": "hurricane",
+      "imagePath": "DisasterVQA/CrisisMMD/910717248708345857_0.jpg",
+      "sourceDataset": "crisismmd",
+      "imageSha256": "814ab606b712d97ded085bf1ad451fc7718b997e18186c5a11bd41072cfe593e"
+    },
+    {
+      "imageId": "img-862",
+      "label": "hurricane",
+      "imagePath": "DisasterVQA/CrisisMMD/909746223954849793_0.jpg",
+      "sourceDataset": "crisismmd",
+      "imageSha256": "c6c5809b9a63dca793766276945a70f0bc3810e934a342325312b0ad51569d57"
+    },
+    {
+      "imageId": "img-1252",
+      "label": "fire",
+      "imagePath": "DisasterVQA/Incidents1M/ebe4c09018.jpg",
+      "sourceDataset": "incidents1m",
+      "imageSha256": "cf4c77e29b48616c1c81dd6e8e0a6466acfda523f2e585d05e6478d1266b9879"
+    },
+    {
+      "imageId": "img-1235",
+      "label": "fire",
+      "imagePath": "DisasterVQA/Incidents1M/00386.jpg",
+      "sourceDataset": "incidents1m",
+      "imageSha256": "06092729961a4b1e4533804a98c9a7f3b580a21e1ed81d32232806c0902501bd"
+    },
+    {
+      "imageId": "img-675",
+      "label": "fire",
+      "imagePath": "DisasterVQA/CrisisMMD/920916661519007745_1.jpg",
+      "sourceDataset": "crisismmd",
+      "imageSha256": "4e49c9967c550dd121c7d5cb9999c014ab48f0be473c7891d3d804f07c39f34b"
+    },
+    {
+      "imageId": "img-664",
+      "label": "fire",
+      "imagePath": "DisasterVQA/CrisisMMD/917796883610820608_0.jpg",
+      "sourceDataset": "crisismmd",
+      "imageSha256": "4a4e177484f036485d2b73077d650d27bc197f4ea39729b05059098cf9e5304c"
+    },
+    {
+      "imageId": "img-302",
+      "label": "fire",
+      "imagePath": "DisasterVQA/MEDIC/925734158596440064_0.jpg",
+      "sourceDataset": "medic",
+      "imageSha256": "ab9b3a464bd2ff572d413575e1bdb32efaa03df166499b1005035fb0821367e6"
+    },
+    {
+      "imageId": "img-1228",
+      "label": "fire",
+      "imagePath": "DisasterVQA/Incidents1M/00362.jpg",
+      "sourceDataset": "incidents1m",
+      "imageSha256": "89c1ddd69db059699d82917dbf4f92c7cde1f379f1feb5258e6fdd5e143bb0c6"
+    },
+    {
+      "imageId": "img-1245",
+      "label": "fire",
+      "imagePath": "DisasterVQA/Incidents1M/0def169415.jpg",
+      "sourceDataset": "incidents1m",
+      "imageSha256": "eb800a1ce53080b64934184cc6d2c19678539e9328b0ac0c7118acac91b037a6"
+    },
+    {
+      "imageId": "img-701",
+      "label": "fire",
+      "imagePath": "DisasterVQA/CrisisMMD/917793881533571073_0.jpg",
+      "sourceDataset": "crisismmd",
+      "imageSha256": "5300d0317d45e535c20d80549e9f8fbdef5d654557832fd11d4a894b9d10210d"
+    },
+    {
+      "imageId": "img-1263",
+      "label": "fire",
+      "imagePath": "DisasterVQA/Incidents1M/1edda950ac.jpg",
+      "sourceDataset": "incidents1m",
+      "imageSha256": "c7c69cc2f2d4f9f33ed85c57db880cbe1146cfe281c519765656d573815e6102"
+    },
+    {
+      "imageId": "img-1283",
+      "label": "fire",
+      "imagePath": "DisasterVQA/Incidents1M/00158_3.jpg",
+      "sourceDataset": "incidents1m",
+      "imageSha256": "87591989d1a09badb993cfd55f23a22420e549d2a71ef0df27b2c7a4127beb13"
+    },
+    {
+      "imageId": "img-948",
+      "label": "fire",
+      "imagePath": "DisasterVQA/CrisisMMD/905999617820688384_0.jpg",
+      "sourceDataset": "crisismmd",
+      "imageSha256": "960d3ee0e55486b75380c7604cbddcc04b605d1245e5dd364024657bfe9274c0"
+    },
+    {
+      "imageId": "img-318",
+      "label": "fire",
+      "imagePath": "DisasterVQA/MEDIC/buildingfire_2016-11-25_02-28-16.jpg",
+      "sourceDataset": "medic",
+      "imageSha256": "c031f7893c492255efc6820137f8635d1e7d065a977aea0312d8be8202005998"
+    },
+    {
+      "imageId": "img-1378",
+      "label": "landslide",
+      "imagePath": "DisasterVQA/Incidents1M/00430.jpg",
+      "sourceDataset": "incidents1m",
+      "imageSha256": "5cda9342dcffa9bfc5604485f368c82143af1c15e150dacd410674d262330b9f"
+    },
+    {
+      "imageId": "img-27",
+      "label": "landslide",
+      "imagePath": "DisasterVQA/MEDIC/000020.jpg",
+      "sourceDataset": "medic",
+      "imageSha256": "a5aa4cd008840150e5fa6ef20b8f874bc715037fc7e6e8798d1145c7ef719fba"
+    },
+    {
+      "imageId": "img-5",
+      "label": "landslide",
+      "imagePath": "DisasterVQA/MEDIC/road_damage_1858.jpg",
+      "sourceDataset": "medic",
+      "imageSha256": "81877e4ff6d04bc5c65f1021b9c2a7da2eb39df3a2243781efef3184849f7244"
+    },
+    {
+      "imageId": "img-45",
+      "label": "landslide",
+      "imagePath": "DisasterVQA/MEDIC/landslide_2017-10-28_03-11-40.jpg",
+      "sourceDataset": "medic",
+      "imageSha256": "2f473cd7ac7b70b8fbc50684c7d8e80738635dfb824f9dac75bf2369fc36397d"
+    },
+    {
+      "imageId": "img-993",
+      "label": "landslide",
+      "imagePath": "DisasterVQA/CrisisMMD/870015964795908097_0.jpg",
+      "sourceDataset": "crisismmd",
+      "imageSha256": "55243bb025d7f4fed350ccf1bb93e0ee636d7899eae0effd27287a7dbeddf37d"
+    },
+    {
+      "imageId": "img-23",
+      "label": "landslide",
+      "imagePath": "DisasterVQA/MEDIC/000029.jpg",
+      "sourceDataset": "medic",
+      "imageSha256": "a1311d3af26d1033280057005bd538f258817410026c0dad15f688c54b1873e9"
+    },
+    {
+      "imageId": "img-17",
+      "label": "landslide",
+      "imagePath": "DisasterVQA/MEDIC/000646.jpg",
+      "sourceDataset": "medic",
+      "imageSha256": "5c25c1fb25d76ffeb0c2f840c5100a5f9a99d6f8d95dfc9bee0bb574dee0885a"
+    },
+    {
+      "imageId": "img-988",
+      "label": "landslide",
+      "imagePath": "DisasterVQA/CrisisMMD/870288120150765568_0.jpg",
+      "sourceDataset": "crisismmd",
+      "imageSha256": "358136360fffe142d7239115e39aca7be388ee07fcb00d3d407a5fad6d8792fa"
+    },
+    {
+      "imageId": "img-36",
+      "label": "landslide",
+      "imagePath": "DisasterVQA/MEDIC/000651.jpg",
+      "sourceDataset": "medic",
+      "imageSha256": "19c04b02fd6c93af7daec4914531981c863201f41b1b208b950b6e4456bf87ed"
+    },
+    {
+      "imageId": "img-16",
+      "label": "landslide",
+      "imagePath": "DisasterVQA/MEDIC/000578.jpg",
+      "sourceDataset": "medic",
+      "imageSha256": "fb957976e653baec6af806c4a09a15ede0becfbd3a3384def51841cd13eaf895"
+    },
+    {
+      "imageId": "img-1003",
+      "label": "landslide",
+      "imagePath": "DisasterVQA/CrisisMMD/870419183632228353_0.jpg",
+      "sourceDataset": "crisismmd",
+      "imageSha256": "747eef1df94098a886d8b13d7537e9110addb96d7486758ab77edbb5d3adf26f"
+    },
+    {
+      "imageId": "img-7",
+      "label": "landslide",
+      "imagePath": "DisasterVQA/MEDIC/road_damage_803.jpg",
+      "sourceDataset": "medic",
+      "imageSha256": "79ee8b8e4f34e7fa9d66928c245c915482b8c2d5d4a3a1f6eb34ecdab83d352e"
+    }
+  ]
+}

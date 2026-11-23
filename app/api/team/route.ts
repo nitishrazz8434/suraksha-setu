@@ -1,0 +1,3 @@
+import {requireAccount} from "../../../lib/auth";
+import {db} from "../../../lib/server";
+export async function GET(request:Request){const user=await requireAccount(request,["officer","admin"]);if(user instanceof Response)return user;const rows=(await db().prepare("SELECT id,name,role,district_ids FROM app_users WHERE enabled=1 AND role IN ('admin','officer')").all<{id:string;name:string;role:string;district_ids:string}>()).results;const users=rows.map(r=>({id:r.id,name:r.name,role:r.role,districtIds:JSON.parse(r.district_ids) as string[]})).filter(r=>user.role==="admin"||r.role==="admin"||r.districtIds.some(id=>user.districtIds.includes(id)));return Response.json({users},{headers:{"Cache-Control":"no-store"}});}

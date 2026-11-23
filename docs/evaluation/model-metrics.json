@@ -1,0 +1,2513 @@
+{
+  "generatedAt": "2026-11-02T06:52:33.024Z",
+  "runtime": {
+    "node": "v24.18.0",
+    "device": "cpu",
+    "dtype": "q8"
+  },
+  "workerSourceSha256": "2c15324851f11a7d4e025b04222f48e0a6650c81c8ed43b103325fc1257dea1b",
+  "textFixtureSha256": "b1321e15af36abef96b73e3b439acdabdbf56108deee06e1a920908032d64198",
+  "retrievalFixtureSha256": "471766045544805fa4560e61f6e80315c408f287df9c1a60ac9f2f5f9202633e",
+  "caveats": [
+    "Small diagnostic evaluation; no models were trained, fine-tuned or tuned against these results.",
+    "Text and retrieval judgements are authored fixtures, not an independently annotated representative field benchmark.",
+    "DisasterVQA images are sampled from published annotations, not a claimed held-out split. Unknown pretraining overlap cannot be ruled out.",
+    "The image sample contains five known disaster classes and no ordinary-scene negatives, so it cannot measure disaster-vs-normal false alarms.",
+    "Classification scores measure top-1 labels, not calibrated confidence or the probability of future disasters.",
+    "CPU evaluation does not establish browser performance or identical numerical output across runtimes."
+  ],
+  "tasks": [
+    {
+      "name": "Incident text classification (english)",
+      "kind": "classification",
+      "language": "english",
+      "model": "Xenova/mobilebert-uncased-mnli",
+      "data": "Manually labelled diagnostic cases",
+      "loadMs": 1401.106,
+      "latency": {
+        "meanMs": 103.61186833333342,
+        "medianMs": 100.03700000000026,
+        "p95Ms": 152.6230999999998
+      },
+      "metrics": {
+        "samples": 60,
+        "correct": 30,
+        "accuracy": 0.5,
+        "accuracyWilson95": [
+          0.37734812427246284,
+          0.6226518757275372
+        ],
+        "macroPrecision": 0.6296296296296297,
+        "macroRecall": 0.5,
+        "macroF1": 0.45647050212267604,
+        "weightedF1": 0.45647050212267604,
+        "labels": [
+          "flood or inundation",
+          "landslide or slope failure",
+          "damaged or blocked infrastructure",
+          "request for food, water or shelter",
+          "medical assistance",
+          "unrelated information"
+        ],
+        "confusion": [
+          [
+            4,
+            0,
+            6,
+            0,
+            0,
+            0
+          ],
+          [
+            1,
+            1,
+            8,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            10,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            3,
+            7,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            1,
+            1,
+            8,
+            0
+          ],
+          [
+            0,
+            0,
+            8,
+            2,
+            0,
+            0
+          ]
+        ],
+        "perClass": [
+          {
+            "label": "flood or inundation",
+            "support": 10,
+            "tp": 4,
+            "fp": 1,
+            "fn": 6,
+            "precision": 0.8,
+            "recall": 0.4,
+            "f1": 0.5333333333333333
+          },
+          {
+            "label": "landslide or slope failure",
+            "support": 10,
+            "tp": 1,
+            "fp": 0,
+            "fn": 9,
+            "precision": 1,
+            "recall": 0.1,
+            "f1": 0.18181818181818182
+          },
+          {
+            "label": "damaged or blocked infrastructure",
+            "support": 10,
+            "tp": 10,
+            "fp": 26,
+            "fn": 0,
+            "precision": 0.2777777777777778,
+            "recall": 1,
+            "f1": 0.4347826086956522
+          },
+          {
+            "label": "request for food, water or shelter",
+            "support": 10,
+            "tp": 7,
+            "fp": 3,
+            "fn": 3,
+            "precision": 0.7,
+            "recall": 0.7,
+            "f1": 0.7
+          },
+          {
+            "label": "medical assistance",
+            "support": 10,
+            "tp": 8,
+            "fp": 0,
+            "fn": 2,
+            "precision": 1,
+            "recall": 0.8,
+            "f1": 0.888888888888889
+          },
+          {
+            "label": "unrelated information",
+            "support": 10,
+            "tp": 0,
+            "fp": 0,
+            "fn": 10,
+            "precision": 0,
+            "recall": 0,
+            "f1": 0
+          }
+        ]
+      },
+      "predictions": [
+        {
+          "id": "english-1",
+          "text": "The river has overflowed and water is entering the houses.",
+          "expected": "flood or inundation",
+          "predicted": "damaged or blocked infrastructure",
+          "modelScore": 0.9928409997827919
+        },
+        {
+          "id": "english-2",
+          "text": "Our ground floor is submerged after overnight rain.",
+          "expected": "flood or inundation",
+          "predicted": "damaged or blocked infrastructure",
+          "modelScore": 0.996674961885059
+        },
+        {
+          "id": "english-3",
+          "text": "Water from the canal has spread across the neighbourhood.",
+          "expected": "flood or inundation",
+          "predicted": "flood or inundation",
+          "modelScore": 0.8825089670854875
+        },
+        {
+          "id": "english-4",
+          "text": "The village is under water after the embankment overflowed.",
+          "expected": "flood or inundation",
+          "predicted": "damaged or blocked infrastructure",
+          "modelScore": 0.9947805632516831
+        },
+        {
+          "id": "english-5",
+          "text": "Waist-deep water surrounds the homes beside the river.",
+          "expected": "flood or inundation",
+          "predicted": "flood or inundation",
+          "modelScore": 0.5032596126341294
+        },
+        {
+          "id": "english-6",
+          "text": "Heavy rain has caused waterlogging throughout the residential area.",
+          "expected": "flood or inundation",
+          "predicted": "damaged or blocked infrastructure",
+          "modelScore": 0.9960320415756204
+        },
+        {
+          "id": "english-7",
+          "text": "The stream burst its banks and inundated the settlement.",
+          "expected": "flood or inundation",
+          "predicted": "flood or inundation",
+          "modelScore": 0.988230317131738
+        },
+        {
+          "id": "english-8",
+          "text": "Several streets are underwater and water levels are rising.",
+          "expected": "flood or inundation",
+          "predicted": "damaged or blocked infrastructure",
+          "modelScore": 0.9966517246450156
+        },
+        {
+          "id": "english-9",
+          "text": "Brown river water is flowing through the courtyard and rooms.",
+          "expected": "flood or inundation",
+          "predicted": "flood or inundation",
+          "modelScore": 0.4985821583127594
+        },
+        {
+          "id": "english-10",
+          "text": "Water has entered twenty houses; there is no slope movement.",
+          "expected": "flood or inundation",
+          "predicted": "damaged or blocked infrastructure",
+          "modelScore": 0.7218437225398319
+        },
+        {
+          "id": "english-11",
+          "text": "Soil and rocks are sliding down the hillside behind our homes.",
+          "expected": "landslide or slope failure",
+          "predicted": "damaged or blocked infrastructure",
+          "modelScore": 0.9977527633653156
+        },
+        {
+          "id": "english-12",
+          "text": "A large section of the slope collapsed this morning.",
+          "expected": "landslide or slope failure",
+          "predicted": "damaged or blocked infrastructure",
+          "modelScore": 0.9831180842645683
+        },
+        {
+          "id": "english-13",
+          "text": "Mud is moving downhill and trees are tilting on the slope.",
+          "expected": "landslide or slope failure",
+          "predicted": "damaged or blocked infrastructure",
+          "modelScore": 0.997114949921378
+        },
+        {
+          "id": "english-14",
+          "text": "The rain-soaked hillside has slipped towards the village.",
+          "expected": "landslide or slope failure",
+          "predicted": "damaged or blocked infrastructure",
+          "modelScore": 0.9884566193989299
+        },
+        {
+          "id": "english-15",
+          "text": "Boulders and loose earth are falling from the mountain.",
+          "expected": "landslide or slope failure",
+          "predicted": "damaged or blocked infrastructure",
+          "modelScore": 0.999567972804696
+        },
+        {
+          "id": "english-16",
+          "text": "Cracks widened before a mass of earth slid off the hill.",
+          "expected": "landslide or slope failure",
+          "predicted": "damaged or blocked infrastructure",
+          "modelScore": 0.9232740399443427
+        },
+        {
+          "id": "english-17",
+          "text": "A mudslide has buried part of the settlement.",
+          "expected": "landslide or slope failure",
+          "predicted": "damaged or blocked infrastructure",
+          "modelScore": 0.983698003787453
+        },
+        {
+          "id": "english-18",
+          "text": "The ground on the steep slope is giving way.",
+          "expected": "landslide or slope failure",
+          "predicted": "flood or inundation",
+          "modelScore": 0.43344524328868084
+        },
+        {
+          "id": "english-19",
+          "text": "Wet soil has detached from the hillside and is moving downhill.",
+          "expected": "landslide or slope failure",
+          "predicted": "damaged or blocked infrastructure",
+          "modelScore": 0.9842142128784875
+        },
+        {
+          "id": "english-20",
+          "text": "There is no river flooding, but the slope above the houses has failed.",
+          "expected": "landslide or slope failure",
+          "predicted": "landslide or slope failure",
+          "modelScore": 0.9887639583016918
+        },
+        {
+          "id": "english-21",
+          "text": "The bridge has collapsed and vehicles cannot cross.",
+          "expected": "damaged or blocked infrastructure",
+          "predicted": "damaged or blocked infrastructure",
+          "modelScore": 0.9994552338908741
+        },
+        {
+          "id": "english-22",
+          "text": "A fallen tree is blocking the main road.",
+          "expected": "damaged or blocked infrastructure",
+          "predicted": "damaged or blocked infrastructure",
+          "modelScore": 0.9982601061762981
+        },
+        {
+          "id": "english-23",
+          "text": "The power lines have snapped and the electricity poles are down.",
+          "expected": "damaged or blocked infrastructure",
+          "predicted": "damaged or blocked infrastructure",
+          "modelScore": 0.9991618636929384
+        },
+        {
+          "id": "english-24",
+          "text": "A large crack has made the village road impassable.",
+          "expected": "damaged or blocked infrastructure",
+          "predicted": "damaged or blocked infrastructure",
+          "modelScore": 0.9966721921732434
+        },
+        {
+          "id": "english-25",
+          "text": "The water supply pipe has burst beneath the street.",
+          "expected": "damaged or blocked infrastructure",
+          "predicted": "damaged or blocked infrastructure",
+          "modelScore": 0.9989866095351517
+        },
+        {
+          "id": "english-26",
+          "text": "The only access bridge is damaged and closed to traffic.",
+          "expected": "damaged or blocked infrastructure",
+          "predicted": "damaged or blocked infrastructure",
+          "modelScore": 0.62476100390085
+        },
+        {
+          "id": "english-27",
+          "text": "A retaining wall has fallen across the road.",
+          "expected": "damaged or blocked infrastructure",
+          "predicted": "damaged or blocked infrastructure",
+          "modelScore": 0.9976248898050268
+        },
+        {
+          "id": "english-28",
+          "text": "The road surface has washed away and buses cannot pass.",
+          "expected": "damaged or blocked infrastructure",
+          "predicted": "damaged or blocked infrastructure",
+          "modelScore": 0.9996272508383189
+        },
+        {
+          "id": "english-29",
+          "text": "The mobile tower is damaged and local communications have stopped.",
+          "expected": "damaged or blocked infrastructure",
+          "predicted": "damaged or blocked infrastructure",
+          "modelScore": 0.9996217963473504
+        },
+        {
+          "id": "english-30",
+          "text": "No flooding is visible, but the bridge deck is broken.",
+          "expected": "damaged or blocked infrastructure",
+          "predicted": "damaged or blocked infrastructure",
+          "modelScore": 0.7294713807305295
+        },
+        {
+          "id": "english-31",
+          "text": "We have run out of drinking water and need clean water delivered.",
+          "expected": "request for food, water or shelter",
+          "predicted": "damaged or blocked infrastructure",
+          "modelScore": 0.9844483785405239
+        },
+        {
+          "id": "english-32",
+          "text": "Please send food packets for the families staying here.",
+          "expected": "request for food, water or shelter",
+          "predicted": "request for food, water or shelter",
+          "modelScore": 0.940889523318346
+        },
+        {
+          "id": "english-33",
+          "text": "Our family needs temporary accommodation for tonight.",
+          "expected": "request for food, water or shelter",
+          "predicted": "request for food, water or shelter",
+          "modelScore": 0.6548244064903149
+        },
+        {
+          "id": "english-34",
+          "text": "The shelter has no meals left for the children.",
+          "expected": "request for food, water or shelter",
+          "predicted": "damaged or blocked infrastructure",
+          "modelScore": 0.9771856780283812
+        },
+        {
+          "id": "english-35",
+          "text": "We need blankets and a dry place to sleep.",
+          "expected": "request for food, water or shelter",
+          "predicted": "request for food, water or shelter",
+          "modelScore": 0.9609355470394281
+        },
+        {
+          "id": "english-36",
+          "text": "Please arrange drinking water and cooked meals at the camp.",
+          "expected": "request for food, water or shelter",
+          "predicted": "request for food, water or shelter",
+          "modelScore": 0.986314429796629
+        },
+        {
+          "id": "english-37",
+          "text": "Twenty families need emergency shelter and basic supplies.",
+          "expected": "request for food, water or shelter",
+          "predicted": "request for food, water or shelter",
+          "modelScore": 0.9503709479786526
+        },
+        {
+          "id": "english-38",
+          "text": "There is no safe drinking water available in our locality.",
+          "expected": "request for food, water or shelter",
+          "predicted": "damaged or blocked infrastructure",
+          "modelScore": 0.9531294707067923
+        },
+        {
+          "id": "english-39",
+          "text": "Can you provide tents for the families sleeping outdoors?",
+          "expected": "request for food, water or shelter",
+          "predicted": "request for food, water or shelter",
+          "modelScore": 0.9270349914538681
+        },
+        {
+          "id": "english-40",
+          "text": "Nobody is injured, but we urgently need food and clean water.",
+          "expected": "request for food, water or shelter",
+          "predicted": "request for food, water or shelter",
+          "modelScore": 0.9947879613851965
+        },
+        {
+          "id": "english-41",
+          "text": "An injured person is bleeding heavily and needs an ambulance.",
+          "expected": "medical assistance",
+          "predicted": "medical assistance",
+          "modelScore": 0.9571112452225701
+        },
+        {
+          "id": "english-42",
+          "text": "A child is struggling to breathe and needs urgent medical care.",
+          "expected": "medical assistance",
+          "predicted": "medical assistance",
+          "modelScore": 0.937245237130855
+        },
+        {
+          "id": "english-43",
+          "text": "Please send a doctor to treat the injured residents.",
+          "expected": "medical assistance",
+          "predicted": "medical assistance",
+          "modelScore": 0.983708165015439
+        },
+        {
+          "id": "english-44",
+          "text": "An elderly patient has chest pain and needs transport to hospital.",
+          "expected": "medical assistance",
+          "predicted": "damaged or blocked infrastructure",
+          "modelScore": 0.5957657524458546
+        },
+        {
+          "id": "english-45",
+          "text": "A resident has a broken leg and needs immediate treatment.",
+          "expected": "medical assistance",
+          "predicted": "medical assistance",
+          "modelScore": 0.9057778589535596
+        },
+        {
+          "id": "english-46",
+          "text": "We need insulin for a diabetic patient at the camp.",
+          "expected": "medical assistance",
+          "predicted": "medical assistance",
+          "modelScore": 0.9106057216041255
+        },
+        {
+          "id": "english-47",
+          "text": "A woman has fainted and requires medical attention.",
+          "expected": "medical assistance",
+          "predicted": "medical assistance",
+          "modelScore": 0.9119721005014344
+        },
+        {
+          "id": "english-48",
+          "text": "The patient has severe dehydration and needs a medical team.",
+          "expected": "medical assistance",
+          "predicted": "medical assistance",
+          "modelScore": 0.9486411985101462
+        },
+        {
+          "id": "english-49",
+          "text": "Please arrange an ambulance for a person with serious burns.",
+          "expected": "medical assistance",
+          "predicted": "medical assistance",
+          "modelScore": 0.9653876784246004
+        },
+        {
+          "id": "english-50",
+          "text": "Food and water are available, but an injured child needs a doctor.",
+          "expected": "medical assistance",
+          "predicted": "request for food, water or shelter",
+          "modelScore": 0.9291440495123428
+        },
+        {
+          "id": "english-51",
+          "text": "The college football match starts at four this afternoon.",
+          "expected": "unrelated information",
+          "predicted": "damaged or blocked infrastructure",
+          "modelScore": 0.017833424365368382
+        },
+        {
+          "id": "english-52",
+          "text": "Please tell me the opening hours of the library.",
+          "expected": "unrelated information",
+          "predicted": "damaged or blocked infrastructure",
+          "modelScore": 0.22823678891454252
+        },
+        {
+          "id": "english-53",
+          "text": "I bought a new notebook for my mathematics class.",
+          "expected": "unrelated information",
+          "predicted": "damaged or blocked infrastructure",
+          "modelScore": 0.10357018887243481
+        },
+        {
+          "id": "english-54",
+          "text": "The school annual day programme is next Friday.",
+          "expected": "unrelated information",
+          "predicted": "request for food, water or shelter",
+          "modelScore": 0.3122557124907792
+        },
+        {
+          "id": "english-55",
+          "text": "My online shopping order arrived this morning.",
+          "expected": "unrelated information",
+          "predicted": "damaged or blocked infrastructure",
+          "modelScore": 0.389042395811418
+        },
+        {
+          "id": "english-56",
+          "text": "Which movie is playing at the cinema this weekend?",
+          "expected": "unrelated information",
+          "predicted": "damaged or blocked infrastructure",
+          "modelScore": 0.044444131296723435
+        },
+        {
+          "id": "english-57",
+          "text": "The restaurant has added a new dessert to its menu.",
+          "expected": "unrelated information",
+          "predicted": "request for food, water or shelter",
+          "modelScore": 0.12679759277502373
+        },
+        {
+          "id": "english-58",
+          "text": "I would like to book tickets for a music concert.",
+          "expected": "unrelated information",
+          "predicted": "damaged or blocked infrastructure",
+          "modelScore": 0.01679713446514392
+        },
+        {
+          "id": "english-59",
+          "text": "Our computer laboratory examination is on Monday.",
+          "expected": "unrelated information",
+          "predicted": "damaged or blocked infrastructure",
+          "modelScore": 0.6194800477786789
+        },
+        {
+          "id": "english-60",
+          "text": "This is a routine message about tomorrow's staff meeting.",
+          "expected": "unrelated information",
+          "predicted": "damaged or blocked infrastructure",
+          "modelScore": 0.005537183428436851
+        }
+      ]
+    },
+    {
+      "name": "Incident text classification (hindi)",
+      "kind": "classification",
+      "language": "hindi",
+      "model": "Xenova/mobilebert-uncased-mnli",
+      "data": "Manually labelled diagnostic cases",
+      "loadMs": 1401.106,
+      "latency": {
+        "meanMs": 166.6178416666669,
+        "medianMs": 145.7565999999988,
+        "p95Ms": 256.8731000000007
+      },
+      "metrics": {
+        "samples": 12,
+        "correct": 2,
+        "accuracy": 0.16666666666666666,
+        "accuracyWilson95": [
+          0.04696414761482223,
+          0.44803635738467273
+        ],
+        "macroPrecision": 0.030303030303030304,
+        "macroRecall": 0.16666666666666666,
+        "macroF1": 0.05128205128205129,
+        "weightedF1": 0.05128205128205129,
+        "labels": [
+          "flood or inundation",
+          "landslide or slope failure",
+          "damaged or blocked infrastructure",
+          "request for food, water or shelter",
+          "medical assistance",
+          "unrelated information"
+        ],
+        "confusion": [
+          [
+            0,
+            0,
+            2,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            2,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            2,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            2,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            1,
+            1,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            2,
+            0,
+            0,
+            0
+          ]
+        ],
+        "perClass": [
+          {
+            "label": "flood or inundation",
+            "support": 2,
+            "tp": 0,
+            "fp": 0,
+            "fn": 2,
+            "precision": 0,
+            "recall": 0,
+            "f1": 0
+          },
+          {
+            "label": "landslide or slope failure",
+            "support": 2,
+            "tp": 0,
+            "fp": 0,
+            "fn": 2,
+            "precision": 0,
+            "recall": 0,
+            "f1": 0
+          },
+          {
+            "label": "damaged or blocked infrastructure",
+            "support": 2,
+            "tp": 2,
+            "fp": 9,
+            "fn": 0,
+            "precision": 0.18181818181818182,
+            "recall": 1,
+            "f1": 0.3076923076923077
+          },
+          {
+            "label": "request for food, water or shelter",
+            "support": 2,
+            "tp": 0,
+            "fp": 1,
+            "fn": 2,
+            "precision": 0,
+            "recall": 0,
+            "f1": 0
+          },
+          {
+            "label": "medical assistance",
+            "support": 2,
+            "tp": 0,
+            "fp": 0,
+            "fn": 2,
+            "precision": 0,
+            "recall": 0,
+            "f1": 0
+          },
+          {
+            "label": "unrelated information",
+            "support": 2,
+            "tp": 0,
+            "fp": 0,
+            "fn": 2,
+            "precision": 0,
+            "recall": 0,
+            "f1": 0
+          }
+        ]
+      },
+      "predictions": [
+        {
+          "id": "hindi-1",
+          "text": "नदी का पानी घरों में घुस गया है और पूरा मोहल्ला डूब रहा है।",
+          "expected": "flood or inundation",
+          "predicted": "damaged or blocked infrastructure",
+          "modelScore": 0.8396761071364158
+        },
+        {
+          "id": "hindi-2",
+          "text": "लगातार बारिश से गांव की गलियों में बाढ़ का पानी भर गया है।",
+          "expected": "flood or inundation",
+          "predicted": "damaged or blocked infrastructure",
+          "modelScore": 0.7663386756104413
+        },
+        {
+          "id": "hindi-3",
+          "text": "पहाड़ की मिट्टी और पत्थर खिसककर गांव की तरफ आ रहे हैं।",
+          "expected": "landslide or slope failure",
+          "predicted": "damaged or blocked infrastructure",
+          "modelScore": 0.8665942165430308
+        },
+        {
+          "id": "hindi-4",
+          "text": "बारिश के बाद पहाड़ी पर भूस्खलन हुआ है।",
+          "expected": "landslide or slope failure",
+          "predicted": "damaged or blocked infrastructure",
+          "modelScore": 0.7791533011785049
+        },
+        {
+          "id": "hindi-5",
+          "text": "गांव का पुल टूट गया है और यातायात बंद है।",
+          "expected": "damaged or blocked infrastructure",
+          "predicted": "damaged or blocked infrastructure",
+          "modelScore": 0.8029430564045485
+        },
+        {
+          "id": "hindi-6",
+          "text": "सड़क पर पेड़ गिर गया है और कोई वाहन नहीं निकल सकता।",
+          "expected": "damaged or blocked infrastructure",
+          "predicted": "damaged or blocked infrastructure",
+          "modelScore": 0.8112561758283939
+        },
+        {
+          "id": "hindi-7",
+          "text": "हमें पीने का पानी और खाने के पैकेट चाहिए।",
+          "expected": "request for food, water or shelter",
+          "predicted": "damaged or blocked infrastructure",
+          "modelScore": 0.8130842325273058
+        },
+        {
+          "id": "hindi-8",
+          "text": "बीस परिवारों के लिए रात में रहने का आश्रय चाहिए।",
+          "expected": "request for food, water or shelter",
+          "predicted": "damaged or blocked infrastructure",
+          "modelScore": 0.8398852301421568
+        },
+        {
+          "id": "hindi-9",
+          "text": "एक घायल व्यक्ति को तुरंत एम्बुलेंस और डॉक्टर चाहिए।",
+          "expected": "medical assistance",
+          "predicted": "damaged or blocked infrastructure",
+          "modelScore": 0.7897930015884427
+        },
+        {
+          "id": "hindi-10",
+          "text": "बच्चे को सांस लेने में तकलीफ है, तुरंत चिकित्सा सहायता भेजें।",
+          "expected": "medical assistance",
+          "predicted": "request for food, water or shelter",
+          "modelScore": 0.7882686284775914
+        },
+        {
+          "id": "hindi-11",
+          "text": "कल कॉलेज में क्रिकेट का मैच है।",
+          "expected": "unrelated information",
+          "predicted": "damaged or blocked infrastructure",
+          "modelScore": 0.7826080942381731
+        },
+        {
+          "id": "hindi-12",
+          "text": "मुझे पुस्तकालय के खुलने का समय बताइए।",
+          "expected": "unrelated information",
+          "predicted": "damaged or blocked infrastructure",
+          "modelScore": 0.7374964414459593
+        }
+      ]
+    },
+    {
+      "name": "RAG document retrieval",
+      "kind": "retrieval",
+      "model": "Xenova/paraphrase-multilingual-MiniLM-L12-v2",
+      "data": "24 authored English/Hindi questions over 16 fictional passages",
+      "settings": {
+        "k": 3,
+        "similarityThreshold": 0.34,
+        "generationEvaluated": false
+      },
+      "loadMs": 1214.7677000000003,
+      "latency": {
+        "meanMs": 7.2984541666667155,
+        "medianMs": 6.483599999999569,
+        "p95Ms": 8.202100000000428
+      },
+      "metrics": {
+        "queries": 24,
+        "k": 3,
+        "precisionAtK": 0.34722222222222215,
+        "recallAtK": 0.9583333333333334,
+        "hitRateAtK": 0.9583333333333334,
+        "mrrAtK": 0.9166666666666666,
+        "ndcgAtK": 0.9242325123454626,
+        "cases": [
+          {
+            "id": "q01",
+            "precision": 0.3333333333333333,
+            "recall": 1,
+            "hit": 1,
+            "reciprocalRank": 0.5,
+            "ndcg": 0.6309297535714575
+          },
+          {
+            "id": "q02",
+            "precision": 0.3333333333333333,
+            "recall": 1,
+            "hit": 1,
+            "reciprocalRank": 1,
+            "ndcg": 1
+          },
+          {
+            "id": "q03",
+            "precision": 0.3333333333333333,
+            "recall": 1,
+            "hit": 1,
+            "reciprocalRank": 1,
+            "ndcg": 1
+          },
+          {
+            "id": "q04",
+            "precision": 0.3333333333333333,
+            "recall": 1,
+            "hit": 1,
+            "reciprocalRank": 1,
+            "ndcg": 1
+          },
+          {
+            "id": "q05",
+            "precision": 0.3333333333333333,
+            "recall": 1,
+            "hit": 1,
+            "reciprocalRank": 1,
+            "ndcg": 1
+          },
+          {
+            "id": "q06",
+            "precision": 0.3333333333333333,
+            "recall": 1,
+            "hit": 1,
+            "reciprocalRank": 1,
+            "ndcg": 1
+          },
+          {
+            "id": "q07",
+            "precision": 0.3333333333333333,
+            "recall": 1,
+            "hit": 1,
+            "reciprocalRank": 1,
+            "ndcg": 1
+          },
+          {
+            "id": "q08",
+            "precision": 0.3333333333333333,
+            "recall": 1,
+            "hit": 1,
+            "reciprocalRank": 1,
+            "ndcg": 1
+          },
+          {
+            "id": "q09",
+            "precision": 0.3333333333333333,
+            "recall": 1,
+            "hit": 1,
+            "reciprocalRank": 1,
+            "ndcg": 1
+          },
+          {
+            "id": "q10",
+            "precision": 0.3333333333333333,
+            "recall": 1,
+            "hit": 1,
+            "reciprocalRank": 1,
+            "ndcg": 1
+          },
+          {
+            "id": "q11",
+            "precision": 0.3333333333333333,
+            "recall": 1,
+            "hit": 1,
+            "reciprocalRank": 1,
+            "ndcg": 1
+          },
+          {
+            "id": "q12",
+            "precision": 0.3333333333333333,
+            "recall": 1,
+            "hit": 1,
+            "reciprocalRank": 1,
+            "ndcg": 1
+          },
+          {
+            "id": "q13",
+            "precision": 0.3333333333333333,
+            "recall": 1,
+            "hit": 1,
+            "reciprocalRank": 1,
+            "ndcg": 1
+          },
+          {
+            "id": "q14",
+            "precision": 0.3333333333333333,
+            "recall": 1,
+            "hit": 1,
+            "reciprocalRank": 1,
+            "ndcg": 1
+          },
+          {
+            "id": "q15",
+            "precision": 0.3333333333333333,
+            "recall": 1,
+            "hit": 1,
+            "reciprocalRank": 0.5,
+            "ndcg": 0.6309297535714575
+          },
+          {
+            "id": "q16",
+            "precision": 0.3333333333333333,
+            "recall": 1,
+            "hit": 1,
+            "reciprocalRank": 1,
+            "ndcg": 1
+          },
+          {
+            "id": "q17",
+            "precision": 0.3333333333333333,
+            "recall": 1,
+            "hit": 1,
+            "reciprocalRank": 1,
+            "ndcg": 1
+          },
+          {
+            "id": "q18",
+            "precision": 0,
+            "recall": 0,
+            "hit": 0,
+            "reciprocalRank": 0,
+            "ndcg": 0
+          },
+          {
+            "id": "q19",
+            "precision": 0.3333333333333333,
+            "recall": 1,
+            "hit": 1,
+            "reciprocalRank": 1,
+            "ndcg": 1
+          },
+          {
+            "id": "q20",
+            "precision": 0.3333333333333333,
+            "recall": 1,
+            "hit": 1,
+            "reciprocalRank": 1,
+            "ndcg": 1
+          },
+          {
+            "id": "q21",
+            "precision": 0.6666666666666666,
+            "recall": 1,
+            "hit": 1,
+            "reciprocalRank": 1,
+            "ndcg": 0.9197207891481876
+          },
+          {
+            "id": "q22",
+            "precision": 0.6666666666666666,
+            "recall": 1,
+            "hit": 1,
+            "reciprocalRank": 1,
+            "ndcg": 1
+          },
+          {
+            "id": "q23",
+            "precision": 0.3333333333333333,
+            "recall": 1,
+            "hit": 1,
+            "reciprocalRank": 1,
+            "ndcg": 1
+          },
+          {
+            "id": "q24",
+            "precision": 0.3333333333333333,
+            "recall": 1,
+            "hit": 1,
+            "reciprocalRank": 1,
+            "ndcg": 1
+          }
+        ]
+      },
+      "predictions": [
+        {
+          "id": "q01",
+          "language": "en",
+          "question": "Which resource limits the number of people Valley School can accommodate?",
+          "relevant": [
+            "water"
+          ],
+          "retrieved": [
+            "occupancy",
+            "water",
+            "access"
+          ],
+          "ranked": [
+            {
+              "id": "occupancy",
+              "score": 0.6863768595479677
+            },
+            {
+              "id": "water",
+              "score": 0.6662438974893955
+            },
+            {
+              "id": "access",
+              "score": 0.5261231091237131
+            },
+            {
+              "id": "route",
+              "score": 0.4881753943752317
+            }
+          ]
+        },
+        {
+          "id": "q02",
+          "language": "en",
+          "question": "How many places are left at Valley School after people have arrived?",
+          "relevant": [
+            "occupancy"
+          ],
+          "retrieved": [
+            "occupancy",
+            "route",
+            "water"
+          ],
+          "ranked": [
+            {
+              "id": "occupancy",
+              "score": 0.6624551827063851
+            },
+            {
+              "id": "route",
+              "score": 0.46567063671474557
+            },
+            {
+              "id": "water",
+              "score": 0.4391025684167255
+            },
+            {
+              "id": "access",
+              "score": 0.3754292002512503
+            }
+          ]
+        },
+        {
+          "id": "q03",
+          "language": "en",
+          "question": "Where can a family needing a wheelchair ramp be accommodated?",
+          "relevant": [
+            "access"
+          ],
+          "retrieved": [
+            "access",
+            "medical",
+            "transport"
+          ],
+          "ranked": [
+            {
+              "id": "access",
+              "score": 0.5533713196471561
+            },
+            {
+              "id": "medical",
+              "score": 0.419028499569463
+            },
+            {
+              "id": "transport",
+              "score": 0.38546630908435936
+            },
+            {
+              "id": "households",
+              "score": 0.3353399153029129
+            }
+          ]
+        },
+        {
+          "id": "q04",
+          "language": "en",
+          "question": "Which destination can take a household that needs a medical team?",
+          "relevant": [
+            "medical"
+          ],
+          "retrieved": [
+            "medical"
+          ],
+          "ranked": [
+            {
+              "id": "medical",
+              "score": 0.601961260130036
+            },
+            {
+              "id": "households",
+              "score": 0.31904394967101424
+            },
+            {
+              "id": "transport",
+              "score": 0.3159911640942631
+            },
+            {
+              "id": "access",
+              "score": 0.2675546601018118
+            }
+          ]
+        },
+        {
+          "id": "q05",
+          "language": "en",
+          "question": "Why was the road to Valley School removed from the plan?",
+          "relevant": [
+            "route"
+          ],
+          "retrieved": [
+            "route",
+            "occupancy",
+            "access"
+          ],
+          "ranked": [
+            {
+              "id": "route",
+              "score": 0.6513971476829046
+            },
+            {
+              "id": "occupancy",
+              "score": 0.46146148956814415
+            },
+            {
+              "id": "access",
+              "score": 0.4551339238146218
+            },
+            {
+              "id": "stale",
+              "score": 0.39626180614683393
+            }
+          ]
+        },
+        {
+          "id": "q06",
+          "language": "en",
+          "question": "Can a road measurement from two days ago still be used?",
+          "relevant": [
+            "stale"
+          ],
+          "retrieved": [
+            "stale",
+            "rain",
+            "route"
+          ],
+          "ranked": [
+            {
+              "id": "stale",
+              "score": 0.5801474064518076
+            },
+            {
+              "id": "rain",
+              "score": 0.4421763019727725
+            },
+            {
+              "id": "route",
+              "score": 0.3439510140429441
+            },
+            {
+              "id": "review",
+              "score": 0.3082249816887984
+            }
+          ]
+        },
+        {
+          "id": "q07",
+          "language": "en",
+          "question": "Does the census-based scenario show how many people were actually evacuated?",
+          "relevant": [
+            "population"
+          ],
+          "retrieved": [
+            "population",
+            "transport",
+            "occupancy"
+          ],
+          "ranked": [
+            {
+              "id": "population",
+              "score": 0.6050533753587389
+            },
+            {
+              "id": "transport",
+              "score": 0.44946977584094167
+            },
+            {
+              "id": "occupancy",
+              "score": 0.34718598866407824
+            },
+            {
+              "id": "route",
+              "score": 0.2934642810780755
+            }
+          ]
+        },
+        {
+          "id": "q08",
+          "language": "en",
+          "question": "Does heavy forecast rain mean there is an official flood alert?",
+          "relevant": [
+            "rain"
+          ],
+          "retrieved": [
+            "rain"
+          ],
+          "ranked": [
+            {
+              "id": "rain",
+              "score": 0.6020275255277456
+            },
+            {
+              "id": "images",
+              "score": 0.2545340220808439
+            },
+            {
+              "id": "population",
+              "score": 0.2442604174775874
+            },
+            {
+              "id": "water",
+              "score": 0.18669595519261967
+            }
+          ]
+        },
+        {
+          "id": "q09",
+          "language": "en",
+          "question": "Am I allowed to verify an observation that I submitted myself?",
+          "relevant": [
+            "review"
+          ],
+          "retrieved": [
+            "review"
+          ],
+          "ranked": [
+            {
+              "id": "review",
+              "score": 0.6509754191884285
+            },
+            {
+              "id": "audit",
+              "score": 0.33396776016263974
+            },
+            {
+              "id": "images",
+              "score": 0.2679007499842325
+            },
+            {
+              "id": "permissions",
+              "score": 0.2480190509912754
+            }
+          ]
+        },
+        {
+          "id": "q10",
+          "language": "en",
+          "question": "Can an officer access operational records from an unassigned district?",
+          "relevant": [
+            "permissions"
+          ],
+          "retrieved": [
+            "permissions",
+            "review"
+          ],
+          "ranked": [
+            {
+              "id": "permissions",
+              "score": 0.6515662836930174
+            },
+            {
+              "id": "review",
+              "score": 0.43741907547803605
+            },
+            {
+              "id": "population",
+              "score": 0.2966457479745866
+            },
+            {
+              "id": "medical",
+              "score": 0.2919966193690864
+            }
+          ]
+        },
+        {
+          "id": "q11",
+          "language": "en",
+          "question": "Can the optimiser split one family between two shelters?",
+          "relevant": [
+            "households"
+          ],
+          "retrieved": [
+            "households",
+            "transport"
+          ],
+          "ranked": [
+            {
+              "id": "households",
+              "score": 0.5263939496371245
+            },
+            {
+              "id": "transport",
+              "score": 0.47338631044820595
+            },
+            {
+              "id": "occupancy",
+              "score": 0.24330991471694588
+            },
+            {
+              "id": "access",
+              "score": 0.24119820642294665
+            }
+          ]
+        },
+        {
+          "id": "q12",
+          "language": "en",
+          "question": "Can an image model score tell the chance of a future disaster?",
+          "relevant": [
+            "images"
+          ],
+          "retrieved": [
+            "images",
+            "population"
+          ],
+          "ranked": [
+            {
+              "id": "images",
+              "score": 0.7328962683903399
+            },
+            {
+              "id": "population",
+              "score": 0.34218457400153984
+            },
+            {
+              "id": "rain",
+              "score": 0.2976247508113826
+            },
+            {
+              "id": "audit",
+              "score": 0.28425093782682886
+            }
+          ]
+        },
+        {
+          "id": "q13",
+          "language": "en",
+          "question": "Does a green polygon on the Wayanad reference map prove a place is safe now?",
+          "relevant": [
+            "maps"
+          ],
+          "retrieved": [
+            "maps",
+            "route"
+          ],
+          "ranked": [
+            {
+              "id": "maps",
+              "score": 0.5666266089002695
+            },
+            {
+              "id": "route",
+              "score": 0.41420081018626026
+            },
+            {
+              "id": "stale",
+              "score": 0.2850244707667598
+            },
+            {
+              "id": "access",
+              "score": 0.28406277468107943
+            }
+          ]
+        },
+        {
+          "id": "q14",
+          "language": "en",
+          "question": "Does adding documents retrain our neural network?",
+          "relevant": [
+            "training"
+          ],
+          "retrieved": [
+            "training"
+          ],
+          "ranked": [
+            {
+              "id": "training",
+              "score": 0.6338964383231169
+            },
+            {
+              "id": "review",
+              "score": 0.25064173347519764
+            },
+            {
+              "id": "audit",
+              "score": 0.2496033966831883
+            },
+            {
+              "id": "households",
+              "score": 0.22985351681934568
+            }
+          ]
+        },
+        {
+          "id": "q15",
+          "language": "en",
+          "question": "Where can we check which officer recorded a review decision?",
+          "relevant": [
+            "audit"
+          ],
+          "retrieved": [
+            "review",
+            "audit",
+            "permissions"
+          ],
+          "ranked": [
+            {
+              "id": "review",
+              "score": 0.6006234362230111
+            },
+            {
+              "id": "audit",
+              "score": 0.4277573551062497
+            },
+            {
+              "id": "permissions",
+              "score": 0.38881138637464663
+            },
+            {
+              "id": "rain",
+              "score": 0.30343369255044234
+            }
+          ]
+        },
+        {
+          "id": "q16",
+          "language": "en",
+          "question": "How does the trip calculation handle families and passenger seats?",
+          "relevant": [
+            "transport"
+          ],
+          "retrieved": [
+            "transport",
+            "population",
+            "households"
+          ],
+          "ranked": [
+            {
+              "id": "transport",
+              "score": 0.7309779728448504
+            },
+            {
+              "id": "population",
+              "score": 0.3916679650254398
+            },
+            {
+              "id": "households",
+              "score": 0.35838216585124616
+            },
+            {
+              "id": "occupancy",
+              "score": 0.31738936024822595
+            }
+          ]
+        },
+        {
+          "id": "q17",
+          "language": "hi",
+          "question": "क्या मैं अपनी भेजी हुई रिपोर्ट खुद सत्यापित कर सकता हूं?",
+          "relevant": [
+            "review"
+          ],
+          "retrieved": [
+            "review",
+            "audit"
+          ],
+          "ranked": [
+            {
+              "id": "review",
+              "score": 0.47048272916573325
+            },
+            {
+              "id": "audit",
+              "score": 0.4139420461053006
+            },
+            {
+              "id": "permissions",
+              "score": 0.30377523755889246
+            },
+            {
+              "id": "route",
+              "score": 0.1771208700525718
+            }
+          ]
+        },
+        {
+          "id": "q18",
+          "language": "hi",
+          "question": "व्हीलचेयर वाले परिवार के लिए कौन सा आश्रय उपयुक्त है?",
+          "relevant": [
+            "access"
+          ],
+          "retrieved": [
+            "households",
+            "transport"
+          ],
+          "ranked": [
+            {
+              "id": "households",
+              "score": 0.4322318477229645
+            },
+            {
+              "id": "transport",
+              "score": 0.40809915832666405
+            },
+            {
+              "id": "medical",
+              "score": 0.32357307107640043
+            },
+            {
+              "id": "access",
+              "score": 0.322707163418523
+            }
+          ]
+        },
+        {
+          "id": "q19",
+          "language": "hi",
+          "question": "क्या फोटो से भविष्य में बाढ़ आने की संभावना पता चलती है?",
+          "relevant": [
+            "images"
+          ],
+          "retrieved": [
+            "images",
+            "rain"
+          ],
+          "ranked": [
+            {
+              "id": "images",
+              "score": 0.44771631736560674
+            },
+            {
+              "id": "rain",
+              "score": 0.3795878803520594
+            },
+            {
+              "id": "population",
+              "score": 0.2898754888278153
+            },
+            {
+              "id": "maps",
+              "score": 0.2177284608073837
+            }
+          ]
+        },
+        {
+          "id": "q20",
+          "language": "hi",
+          "question": "क्या अधिकारी दूसरे जिले के रिकॉर्ड देख सकता है?",
+          "relevant": [
+            "permissions"
+          ],
+          "retrieved": [
+            "permissions",
+            "review"
+          ],
+          "ranked": [
+            {
+              "id": "permissions",
+              "score": 0.5287458044108222
+            },
+            {
+              "id": "review",
+              "score": 0.4542750336546045
+            },
+            {
+              "id": "audit",
+              "score": 0.25787883609032103
+            },
+            {
+              "id": "occupancy",
+              "score": 0.20985388726013093
+            }
+          ]
+        },
+        {
+          "id": "q21",
+          "language": "en",
+          "question": "Which rules keep a medical household together at a suitable destination?",
+          "relevant": [
+            "households",
+            "medical"
+          ],
+          "retrieved": [
+            "households",
+            "transport",
+            "medical"
+          ],
+          "ranked": [
+            {
+              "id": "households",
+              "score": 0.5252785653460258
+            },
+            {
+              "id": "transport",
+              "score": 0.46971164243577074
+            },
+            {
+              "id": "medical",
+              "score": 0.45140734070008204
+            },
+            {
+              "id": "access",
+              "score": 0.26282896845597103
+            }
+          ]
+        },
+        {
+          "id": "q22",
+          "language": "en",
+          "question": "How do broken bridges and outdated road records affect usable routes?",
+          "relevant": [
+            "route",
+            "stale"
+          ],
+          "retrieved": [
+            "stale",
+            "route"
+          ],
+          "ranked": [
+            {
+              "id": "stale",
+              "score": 0.5841417941820858
+            },
+            {
+              "id": "route",
+              "score": 0.4622996977771038
+            },
+            {
+              "id": "maps",
+              "score": 0.32078049660743896
+            },
+            {
+              "id": "audit",
+              "score": 0.2740914147431323
+            }
+          ]
+        },
+        {
+          "id": "q23",
+          "language": "hi",
+          "question": "क्या दस्तावेज जोड़ने से मॉडल की ट्रेनिंग बदलती है?",
+          "relevant": [
+            "training"
+          ],
+          "retrieved": [
+            "training"
+          ],
+          "ranked": [
+            {
+              "id": "training",
+              "score": 0.6245404369942689
+            },
+            {
+              "id": "audit",
+              "score": 0.3218964299865206
+            },
+            {
+              "id": "review",
+              "score": 0.2780812199743918
+            },
+            {
+              "id": "images",
+              "score": 0.21826524981503695
+            }
+          ]
+        },
+        {
+          "id": "q24",
+          "language": "hi",
+          "question": "पानी की कमी से आश्रय की क्षमता कैसे सीमित होती है?",
+          "relevant": [
+            "water"
+          ],
+          "retrieved": [
+            "water",
+            "access"
+          ],
+          "ranked": [
+            {
+              "id": "water",
+              "score": 0.48363069262111946
+            },
+            {
+              "id": "access",
+              "score": 0.3644005812135968
+            },
+            {
+              "id": "transport",
+              "score": 0.3260996973389637
+            },
+            {
+              "id": "households",
+              "score": 0.3075714111765847
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Disaster image classification",
+      "kind": "classification",
+      "model": "Xenova/clip-vit-base-patch32",
+      "data": {
+        "dataset": "QCRI/DisasterVQA",
+        "revision": "f341ce34814a93bad8abfe73da898a309116a59e",
+        "split": "Published annotations; no held-out split claimed",
+        "perClass": 12,
+        "manifest": "vision-sample.json"
+      },
+      "settings": {
+        "candidates": [
+          "floodwater covering streets or homes",
+          "mud and rocks from a landslide covering a slope or road",
+          "collapsed or visibly damaged buildings after an earthquake",
+          "buildings or trees damaged by a cyclone or severe wind",
+          "an active wildfire with flames or heavy smoke",
+          "coastal storm surge or tsunami water reaching land",
+          "drought-affected land with very dry soil or failed crops",
+          "an ordinary outdoor scene with no obvious disaster signs",
+          "an ordinary indoor scene with no obvious disaster signs"
+        ],
+        "outputMapping": [
+          "flood",
+          "landslide",
+          "earthquake",
+          "hurricane",
+          "fire",
+          "tsunami",
+          "drought",
+          "not_disaster",
+          "not_disaster"
+        ],
+        "note": "Top-1 over the application's nine descriptions, retaining tsunami/drought/not_disaster as possible incorrect outputs. Caption generation, UI confidence thresholds and VQA answers are not evaluated."
+      },
+      "loadMs": 1202.1437000000005,
+      "latency": {
+        "meanMs": 56.93962833333347,
+        "medianMs": 53.89770000000135,
+        "p95Ms": 76.82459999999992
+      },
+      "metrics": {
+        "samples": 60,
+        "correct": 41,
+        "accuracy": 0.6833333333333333,
+        "accuracyWilson95": [
+          0.5576599505698345,
+          0.7869429415882567
+        ],
+        "macroPrecision": 0.7649572649572649,
+        "macroRecall": 0.6833333333333333,
+        "macroF1": 0.6897619047619047,
+        "weightedF1": 0.6897619047619048,
+        "labels": [
+          "earthquake",
+          "flood",
+          "hurricane",
+          "fire",
+          "landslide",
+          "drought",
+          "tsunami",
+          "not_disaster"
+        ],
+        "confusion": [
+          [
+            10,
+            0,
+            0,
+            0,
+            1,
+            1,
+            0,
+            0
+          ],
+          [
+            0,
+            9,
+            1,
+            0,
+            1,
+            0,
+            1,
+            0
+          ],
+          [
+            4,
+            3,
+            3,
+            0,
+            1,
+            0,
+            0,
+            1
+          ],
+          [
+            2,
+            0,
+            0,
+            9,
+            0,
+            0,
+            1,
+            0
+          ],
+          [
+            2,
+            0,
+            0,
+            0,
+            10,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        ],
+        "perClass": [
+          {
+            "label": "earthquake",
+            "support": 12,
+            "tp": 10,
+            "fp": 8,
+            "fn": 2,
+            "precision": 0.5555555555555556,
+            "recall": 0.8333333333333334,
+            "f1": 0.6666666666666667
+          },
+          {
+            "label": "flood",
+            "support": 12,
+            "tp": 9,
+            "fp": 3,
+            "fn": 3,
+            "precision": 0.75,
+            "recall": 0.75,
+            "f1": 0.75
+          },
+          {
+            "label": "hurricane",
+            "support": 12,
+            "tp": 3,
+            "fp": 1,
+            "fn": 9,
+            "precision": 0.75,
+            "recall": 0.25,
+            "f1": 0.375
+          },
+          {
+            "label": "fire",
+            "support": 12,
+            "tp": 9,
+            "fp": 0,
+            "fn": 3,
+            "precision": 1,
+            "recall": 0.75,
+            "f1": 0.8571428571428571
+          },
+          {
+            "label": "landslide",
+            "support": 12,
+            "tp": 10,
+            "fp": 3,
+            "fn": 2,
+            "precision": 0.7692307692307693,
+            "recall": 0.8333333333333334,
+            "f1": 0.8
+          }
+        ]
+      },
+      "predictions": [
+        {
+          "imageId": "img-374",
+          "imagePath": "DisasterVQA/MEDIC/ecuador_eq_severe_im_315.png",
+          "imageSha256": "5a0af25564edf72c257d63ef14cd02b7b5dc0476e2fde24296ed7caf93f294d7",
+          "expected": "earthquake",
+          "predicted": "earthquake",
+          "winningDescription": "collapsed or visibly damaged buildings after an earthquake",
+          "modelScore": 0.7294533848762512
+        },
+        {
+          "imageId": "img-582",
+          "imagePath": "DisasterVQA/MEDIC/792976020928393216_1.jpg",
+          "imageSha256": "013e53c7cb327a180114be9381aa139f4beb1950adc54fe256dfab193d7a3cc2",
+          "expected": "earthquake",
+          "predicted": "earthquake",
+          "winningDescription": "collapsed or visibly damaged buildings after an earthquake",
+          "modelScore": 0.9309585094451904
+        },
+        {
+          "imageId": "img-424",
+          "imagePath": "DisasterVQA/MEDIC/building_damage_1991.jpg",
+          "imageSha256": "3cde0641dfc4a68afd31fe1dde42ad3f07ae358f68c3b5e4c614b27c0401bd14",
+          "expected": "earthquake",
+          "predicted": "earthquake",
+          "winningDescription": "collapsed or visibly damaged buildings after an earthquake",
+          "modelScore": 0.8202869296073914
+        },
+        {
+          "imageId": "img-467",
+          "imagePath": "DisasterVQA/MEDIC/road_damage_3043.jpg",
+          "imageSha256": "8b55c3123c82b69ef767f65331da1216b571b0dfd9041236c45baa8d59abf7af",
+          "expected": "earthquake",
+          "predicted": "landslide",
+          "winningDescription": "mud and rocks from a landslide covering a slope or road",
+          "modelScore": 0.47242334485054016
+        },
+        {
+          "imageId": "img-562",
+          "imagePath": "DisasterVQA/MEDIC/593762122179420160_0.jpg",
+          "imageSha256": "b625eee6b1aef78367e837446e0985e9bec60e9667886a3b8b09a75cc6cb695f",
+          "expected": "earthquake",
+          "predicted": "earthquake",
+          "winningDescription": "collapsed or visibly damaged buildings after an earthquake",
+          "modelScore": 0.46021124720573425
+        },
+        {
+          "imageId": "img-571",
+          "imagePath": "DisasterVQA/MEDIC/797839629072220160_0.jpg",
+          "imageSha256": "5eea83acf560ad86b8e3f8ec1daa67cf2e2f9f633823c83b7480a667b3821d86",
+          "expected": "earthquake",
+          "predicted": "earthquake",
+          "winningDescription": "collapsed or visibly damaged buildings after an earthquake",
+          "modelScore": 0.6878858208656311
+        },
+        {
+          "imageId": "img-359",
+          "imagePath": "DisasterVQA/MEDIC/ecuador_eq_severe_im_1951.jpg",
+          "imageSha256": "63621a2b2c29f299b386bfa5702669d72f140568fac51d0e112ef2b8ac3bb754",
+          "expected": "earthquake",
+          "predicted": "earthquake",
+          "winningDescription": "collapsed or visibly damaged buildings after an earthquake",
+          "modelScore": 0.7402794361114502
+        },
+        {
+          "imageId": "img-346",
+          "imagePath": "DisasterVQA/MEDIC/ecuador_eq_severe_im_1222.jpg",
+          "imageSha256": "800864a00dab042f66d51967ecc53887df6f6d4e2afeabad7fc36dfd6953a702",
+          "expected": "earthquake",
+          "predicted": "earthquake",
+          "winningDescription": "collapsed or visibly damaged buildings after an earthquake",
+          "modelScore": 0.8700166344642639
+        },
+        {
+          "imageId": "img-546",
+          "imagePath": "DisasterVQA/MEDIC/598155777782652928_0.jpg",
+          "imageSha256": "ad14c6a0cb93289127afef29b1fabb84e0f82c6834f511c7614ed203e990a2e4",
+          "expected": "earthquake",
+          "predicted": "drought",
+          "winningDescription": "drought-affected land with very dry soil or failed crops",
+          "modelScore": 0.37533965706825256
+        },
+        {
+          "imageId": "img-224",
+          "imagePath": "DisasterVQA/MEDIC/591928597528518658_0.jpg",
+          "imageSha256": "b5a49d0bb6474e1d20a318bae8447243da7023ecaf5f59b93501c08736782e17",
+          "expected": "earthquake",
+          "predicted": "earthquake",
+          "winningDescription": "collapsed or visibly damaged buildings after an earthquake",
+          "modelScore": 0.9604666233062744
+        },
+        {
+          "imageId": "img-486",
+          "imagePath": "DisasterVQA/MEDIC/nepal_eq_severe_im_15019.jpg",
+          "imageSha256": "74718c91cc782f7a6625bc88467c6feb34ac57c1a9627cef9253e9e2a374a5c6",
+          "expected": "earthquake",
+          "predicted": "earthquake",
+          "winningDescription": "collapsed or visibly damaged buildings after an earthquake",
+          "modelScore": 0.6675036549568176
+        },
+        {
+          "imageId": "img-364",
+          "imagePath": "DisasterVQA/MEDIC/ecuador_eq_severe_im_2238.jpg",
+          "imageSha256": "705742da7d86dafb7164164a3bf70178613ed10a9604ccc1156477b2b00117f0",
+          "expected": "earthquake",
+          "predicted": "earthquake",
+          "winningDescription": "collapsed or visibly damaged buildings after an earthquake",
+          "modelScore": 0.6366456151008606
+        },
+        {
+          "imageId": "img-896",
+          "imagePath": "DisasterVQA/CrisisMMD/905552718088900608_0.jpg",
+          "imageSha256": "523b6d785b24012a3a90984171a4794b1a491f81f9244460b52b5c45c06be4ae",
+          "expected": "flood",
+          "predicted": "flood",
+          "winningDescription": "floodwater covering streets or homes",
+          "modelScore": 0.9504256844520569
+        },
+        {
+          "imageId": "img-108",
+          "imagePath": "DisasterVQA/MEDIC/bridge_damage_2241.jpg",
+          "imageSha256": "4d39a2be4f682f0ec968c216db4c5bfa8db4bb3bc0378ca8a6c377e5d93a54cd",
+          "expected": "flood",
+          "predicted": "landslide",
+          "winningDescription": "mud and rocks from a landslide covering a slope or road",
+          "modelScore": 0.5441643595695496
+        },
+        {
+          "imageId": "img-178",
+          "imagePath": "DisasterVQA/MEDIC/966860767512363008_0.jpg",
+          "imageSha256": "c09e9842721ffc11f0707e5cb25672be3b5b4509056f18ddb318d12f35627a10",
+          "expected": "flood",
+          "predicted": "flood",
+          "winningDescription": "floodwater covering streets or homes",
+          "modelScore": 0.6317695379257202
+        },
+        {
+          "imageId": "img-949",
+          "imagePath": "DisasterVQA/CrisisMMD/908723846735437825_0.jpg",
+          "imageSha256": "2a1071a622a4b828a3f49bf716503f2139e894c52430f75a4f82bae409241bf1",
+          "expected": "flood",
+          "predicted": "tsunami",
+          "winningDescription": "coastal storm surge or tsunami water reaching land",
+          "modelScore": 0.4405488967895508
+        },
+        {
+          "imageId": "img-1159",
+          "imagePath": "DisasterVQA/Incidents1M/00389_1.jpg",
+          "imageSha256": "78da508fd7a521640206d76077106cfbe21df5742abd38c4d80995fdd623cdfc",
+          "expected": "flood",
+          "predicted": "hurricane",
+          "winningDescription": "buildings or trees damaged by a cyclone or severe wind",
+          "modelScore": 0.623314380645752
+        },
+        {
+          "imageId": "img-914",
+          "imagePath": "DisasterVQA/CrisisMMD/904353547025883138_2.jpg",
+          "imageSha256": "fd5000e40291213497a39bf9a677693b45a42526f6e674f67f17bb168cc71542",
+          "expected": "flood",
+          "predicted": "flood",
+          "winningDescription": "floodwater covering streets or homes",
+          "modelScore": 0.9381084442138672
+        },
+        {
+          "imageId": "img-1165",
+          "imagePath": "DisasterVQA/Incidents1M/00006_1.jpg",
+          "imageSha256": "0aafca27a3d28abc3e277096f7a9f5048c5d24638cac313ff6af7b32b1bd9405",
+          "expected": "flood",
+          "predicted": "flood",
+          "winningDescription": "floodwater covering streets or homes",
+          "modelScore": 0.8426379561424255
+        },
+        {
+          "imageId": "img-130",
+          "imagePath": "DisasterVQA/MEDIC/673110855131631616_3.jpg",
+          "imageSha256": "b7d840c96c17b90fa5825b278d79daaa66eb08bd728b6cbe2ea9090a1e9c4f37",
+          "expected": "flood",
+          "predicted": "flood",
+          "winningDescription": "floodwater covering streets or homes",
+          "modelScore": 0.8754180073738098
+        },
+        {
+          "imageId": "img-193",
+          "imagePath": "DisasterVQA/MEDIC/938232969650692096_0.jpg",
+          "imageSha256": "ea04cb4ff62f5421135d338961dae1c1627dc94a269a203fc86e96ee60e440d7",
+          "expected": "flood",
+          "predicted": "flood",
+          "winningDescription": "floodwater covering streets or homes",
+          "modelScore": 0.9083446860313416
+        },
+        {
+          "imageId": "img-183",
+          "imagePath": "DisasterVQA/MEDIC/934440841061449734_0.jpg",
+          "imageSha256": "f0ce81dbd3b142e0f4a0b4c4dbca2f7acdd6f6096a7229dd9ad25ca5428e8e39",
+          "expected": "flood",
+          "predicted": "flood",
+          "winningDescription": "floodwater covering streets or homes",
+          "modelScore": 0.9913450479507446
+        },
+        {
+          "imageId": "img-1013",
+          "imagePath": "DisasterVQA/CrisisMMD/871260385252343808_0.jpg",
+          "imageSha256": "f6d18881183e8cb158dc3964e1a9be316f26620dfb20ee01dc320b74984af476",
+          "expected": "flood",
+          "predicted": "flood",
+          "winningDescription": "floodwater covering streets or homes",
+          "modelScore": 0.8851252794265747
+        },
+        {
+          "imageId": "img-187",
+          "imagePath": "DisasterVQA/MEDIC/979626187390676992_0.jpg",
+          "imageSha256": "92083e62bae74c70bd324701cff6fd0b602076a2ecc7078566bb72b923b83150",
+          "expected": "flood",
+          "predicted": "flood",
+          "winningDescription": "floodwater covering streets or homes",
+          "modelScore": 0.8932983875274658
+        },
+        {
+          "imageId": "img-899",
+          "imagePath": "DisasterVQA/CrisisMMD/906158724317937665_0.jpg",
+          "imageSha256": "6fa0a0edbfa30320f3a97beca1e27d393b2d57ce60eb45995c48400c1167b33d",
+          "expected": "hurricane",
+          "predicted": "flood",
+          "winningDescription": "floodwater covering streets or homes",
+          "modelScore": 0.8773995637893677
+        },
+        {
+          "imageId": "img-757",
+          "imagePath": "DisasterVQA/CrisisMMD/912114770710581248_0.jpg",
+          "imageSha256": "72c0052945db2958c056db623f243ed8ec5e8191a85a2a7f3d87d20558c7f00b",
+          "expected": "hurricane",
+          "predicted": "flood",
+          "winningDescription": "floodwater covering streets or homes",
+          "modelScore": 0.9350070953369141
+        },
+        {
+          "imageId": "img-796",
+          "imagePath": "DisasterVQA/CrisisMMD/928140150198153216_0.jpg",
+          "imageSha256": "5c56d1ea6512287a4f6bc918f2bcd18741869062fadc157c7cc2343754721928",
+          "expected": "hurricane",
+          "predicted": "flood",
+          "winningDescription": "floodwater covering streets or homes",
+          "modelScore": 0.36974889039993286
+        },
+        {
+          "imageId": "img-83",
+          "imagePath": "DisasterVQA/MEDIC/978020952742150149_0.jpg",
+          "imageSha256": "42385a8f061b681c3b36a04ce6c54237dd7be45893f6db512f30e534dda2e76f",
+          "expected": "hurricane",
+          "predicted": "hurricane",
+          "winningDescription": "buildings or trees damaged by a cyclone or severe wind",
+          "modelScore": 0.6364848613739014
+        },
+        {
+          "imageId": "img-61",
+          "imagePath": "DisasterVQA/MEDIC/nepal_eq_severe_im_14624.jpg",
+          "imageSha256": "c732677c864de5b26211dae6b7701cb3aed3b84901a50cf99631453334e9af87",
+          "expected": "hurricane",
+          "predicted": "earthquake",
+          "winningDescription": "collapsed or visibly damaged buildings after an earthquake",
+          "modelScore": 0.9006567597389221
+        },
+        {
+          "imageId": "img-801",
+          "imagePath": "DisasterVQA/CrisisMMD/928246284791640064_0.jpg",
+          "imageSha256": "8173c2e3f3648a3813b337552db383ee21f49e24090bf0f81c08c23f870eb73e",
+          "expected": "hurricane",
+          "predicted": "hurricane",
+          "winningDescription": "buildings or trees damaged by a cyclone or severe wind",
+          "modelScore": 0.817750871181488
+        },
+        {
+          "imageId": "img-60",
+          "imagePath": "DisasterVQA/MEDIC/nepal_eq_mild_im_15118.jpg",
+          "imageSha256": "6081fabe8d54289effb0a73182ef5d98107844b29c52b2060777610b882152a7",
+          "expected": "hurricane",
+          "predicted": "not_disaster",
+          "winningDescription": "an ordinary outdoor scene with no obvious disaster signs",
+          "modelScore": 0.5360687375068665
+        },
+        {
+          "imageId": "img-859",
+          "imagePath": "DisasterVQA/CrisisMMD/909738182031413248_0.jpg",
+          "imageSha256": "4c4deca2e2970d70a446a735f6c18ef838bcc4041fa80bec2b960ebe622ca59e",
+          "expected": "hurricane",
+          "predicted": "landslide",
+          "winningDescription": "mud and rocks from a landslide covering a slope or road",
+          "modelScore": 0.3492078185081482
+        },
+        {
+          "imageId": "img-86",
+          "imagePath": "DisasterVQA/MEDIC/924327451169345538_0.jpg",
+          "imageSha256": "9c0cc8e107d44b6b8bbb28b809212dc709aea97ed5dbc4e7d559da4d2399e5c6",
+          "expected": "hurricane",
+          "predicted": "earthquake",
+          "winningDescription": "collapsed or visibly damaged buildings after an earthquake",
+          "modelScore": 0.7008062601089478
+        },
+        {
+          "imageId": "img-811",
+          "imagePath": "DisasterVQA/CrisisMMD/917782042473041920_0.jpg",
+          "imageSha256": "1bccfc6c1b9281d5e7c82a28aab03924b99bc529881c4346925d973e7e539cca",
+          "expected": "hurricane",
+          "predicted": "earthquake",
+          "winningDescription": "collapsed or visibly damaged buildings after an earthquake",
+          "modelScore": 0.3542260527610779
+        },
+        {
+          "imageId": "img-738",
+          "imagePath": "DisasterVQA/CrisisMMD/910717248708345857_0.jpg",
+          "imageSha256": "814ab606b712d97ded085bf1ad451fc7718b997e18186c5a11bd41072cfe593e",
+          "expected": "hurricane",
+          "predicted": "earthquake",
+          "winningDescription": "collapsed or visibly damaged buildings after an earthquake",
+          "modelScore": 0.9506379961967468
+        },
+        {
+          "imageId": "img-862",
+          "imagePath": "DisasterVQA/CrisisMMD/909746223954849793_0.jpg",
+          "imageSha256": "c6c5809b9a63dca793766276945a70f0bc3810e934a342325312b0ad51569d57",
+          "expected": "hurricane",
+          "predicted": "hurricane",
+          "winningDescription": "buildings or trees damaged by a cyclone or severe wind",
+          "modelScore": 0.9502554535865784
+        },
+        {
+          "imageId": "img-1252",
+          "imagePath": "DisasterVQA/Incidents1M/ebe4c09018.jpg",
+          "imageSha256": "cf4c77e29b48616c1c81dd6e8e0a6466acfda523f2e585d05e6478d1266b9879",
+          "expected": "fire",
+          "predicted": "earthquake",
+          "winningDescription": "collapsed or visibly damaged buildings after an earthquake",
+          "modelScore": 0.4987843632698059
+        },
+        {
+          "imageId": "img-1235",
+          "imagePath": "DisasterVQA/Incidents1M/00386.jpg",
+          "imageSha256": "06092729961a4b1e4533804a98c9a7f3b580a21e1ed81d32232806c0902501bd",
+          "expected": "fire",
+          "predicted": "fire",
+          "winningDescription": "an active wildfire with flames or heavy smoke",
+          "modelScore": 0.6137130856513977
+        },
+        {
+          "imageId": "img-675",
+          "imagePath": "DisasterVQA/CrisisMMD/920916661519007745_1.jpg",
+          "imageSha256": "4e49c9967c550dd121c7d5cb9999c014ab48f0be473c7891d3d804f07c39f34b",
+          "expected": "fire",
+          "predicted": "fire",
+          "winningDescription": "an active wildfire with flames or heavy smoke",
+          "modelScore": 0.8736709356307983
+        },
+        {
+          "imageId": "img-664",
+          "imagePath": "DisasterVQA/CrisisMMD/917796883610820608_0.jpg",
+          "imageSha256": "4a4e177484f036485d2b73077d650d27bc197f4ea39729b05059098cf9e5304c",
+          "expected": "fire",
+          "predicted": "fire",
+          "winningDescription": "an active wildfire with flames or heavy smoke",
+          "modelScore": 0.9942914247512817
+        },
+        {
+          "imageId": "img-302",
+          "imagePath": "DisasterVQA/MEDIC/925734158596440064_0.jpg",
+          "imageSha256": "ab9b3a464bd2ff572d413575e1bdb32efaa03df166499b1005035fb0821367e6",
+          "expected": "fire",
+          "predicted": "fire",
+          "winningDescription": "an active wildfire with flames or heavy smoke",
+          "modelScore": 0.9301393628120422
+        },
+        {
+          "imageId": "img-1228",
+          "imagePath": "DisasterVQA/Incidents1M/00362.jpg",
+          "imageSha256": "89c1ddd69db059699d82917dbf4f92c7cde1f379f1feb5258e6fdd5e143bb0c6",
+          "expected": "fire",
+          "predicted": "tsunami",
+          "winningDescription": "coastal storm surge or tsunami water reaching land",
+          "modelScore": 0.34918904304504395
+        },
+        {
+          "imageId": "img-1245",
+          "imagePath": "DisasterVQA/Incidents1M/0def169415.jpg",
+          "imageSha256": "eb800a1ce53080b64934184cc6d2c19678539e9328b0ac0c7118acac91b037a6",
+          "expected": "fire",
+          "predicted": "fire",
+          "winningDescription": "an active wildfire with flames or heavy smoke",
+          "modelScore": 0.9832032918930054
+        },
+        {
+          "imageId": "img-701",
+          "imagePath": "DisasterVQA/CrisisMMD/917793881533571073_0.jpg",
+          "imageSha256": "5300d0317d45e535c20d80549e9f8fbdef5d654557832fd11d4a894b9d10210d",
+          "expected": "fire",
+          "predicted": "fire",
+          "winningDescription": "an active wildfire with flames or heavy smoke",
+          "modelScore": 0.42656800150871277
+        },
+        {
+          "imageId": "img-1263",
+          "imagePath": "DisasterVQA/Incidents1M/1edda950ac.jpg",
+          "imageSha256": "c7c69cc2f2d4f9f33ed85c57db880cbe1146cfe281c519765656d573815e6102",
+          "expected": "fire",
+          "predicted": "earthquake",
+          "winningDescription": "collapsed or visibly damaged buildings after an earthquake",
+          "modelScore": 0.7552849054336548
+        },
+        {
+          "imageId": "img-1283",
+          "imagePath": "DisasterVQA/Incidents1M/00158_3.jpg",
+          "imageSha256": "87591989d1a09badb993cfd55f23a22420e549d2a71ef0df27b2c7a4127beb13",
+          "expected": "fire",
+          "predicted": "fire",
+          "winningDescription": "an active wildfire with flames or heavy smoke",
+          "modelScore": 0.9935147762298584
+        },
+        {
+          "imageId": "img-948",
+          "imagePath": "DisasterVQA/CrisisMMD/905999617820688384_0.jpg",
+          "imageSha256": "960d3ee0e55486b75380c7604cbddcc04b605d1245e5dd364024657bfe9274c0",
+          "expected": "fire",
+          "predicted": "fire",
+          "winningDescription": "an active wildfire with flames or heavy smoke",
+          "modelScore": 0.8345977067947388
+        },
+        {
+          "imageId": "img-318",
+          "imagePath": "DisasterVQA/MEDIC/buildingfire_2016-11-25_02-28-16.jpg",
+          "imageSha256": "c031f7893c492255efc6820137f8635d1e7d065a977aea0312d8be8202005998",
+          "expected": "fire",
+          "predicted": "fire",
+          "winningDescription": "an active wildfire with flames or heavy smoke",
+          "modelScore": 0.6468636989593506
+        },
+        {
+          "imageId": "img-1378",
+          "imagePath": "DisasterVQA/Incidents1M/00430.jpg",
+          "imageSha256": "5cda9342dcffa9bfc5604485f368c82143af1c15e150dacd410674d262330b9f",
+          "expected": "landslide",
+          "predicted": "earthquake",
+          "winningDescription": "collapsed or visibly damaged buildings after an earthquake",
+          "modelScore": 0.9280661940574646
+        },
+        {
+          "imageId": "img-27",
+          "imagePath": "DisasterVQA/MEDIC/000020.jpg",
+          "imageSha256": "a5aa4cd008840150e5fa6ef20b8f874bc715037fc7e6e8798d1145c7ef719fba",
+          "expected": "landslide",
+          "predicted": "earthquake",
+          "winningDescription": "collapsed or visibly damaged buildings after an earthquake",
+          "modelScore": 0.7593180537223816
+        },
+        {
+          "imageId": "img-5",
+          "imagePath": "DisasterVQA/MEDIC/road_damage_1858.jpg",
+          "imageSha256": "81877e4ff6d04bc5c65f1021b9c2a7da2eb39df3a2243781efef3184849f7244",
+          "expected": "landslide",
+          "predicted": "landslide",
+          "winningDescription": "mud and rocks from a landslide covering a slope or road",
+          "modelScore": 0.8043920993804932
+        },
+        {
+          "imageId": "img-45",
+          "imagePath": "DisasterVQA/MEDIC/landslide_2017-10-28_03-11-40.jpg",
+          "imageSha256": "2f473cd7ac7b70b8fbc50684c7d8e80738635dfb824f9dac75bf2369fc36397d",
+          "expected": "landslide",
+          "predicted": "landslide",
+          "winningDescription": "mud and rocks from a landslide covering a slope or road",
+          "modelScore": 0.9658433794975281
+        },
+        {
+          "imageId": "img-993",
+          "imagePath": "DisasterVQA/CrisisMMD/870015964795908097_0.jpg",
+          "imageSha256": "55243bb025d7f4fed350ccf1bb93e0ee636d7899eae0effd27287a7dbeddf37d",
+          "expected": "landslide",
+          "predicted": "landslide",
+          "winningDescription": "mud and rocks from a landslide covering a slope or road",
+          "modelScore": 0.7239962220191956
+        },
+        {
+          "imageId": "img-23",
+          "imagePath": "DisasterVQA/MEDIC/000029.jpg",
+          "imageSha256": "a1311d3af26d1033280057005bd538f258817410026c0dad15f688c54b1873e9",
+          "expected": "landslide",
+          "predicted": "landslide",
+          "winningDescription": "mud and rocks from a landslide covering a slope or road",
+          "modelScore": 0.20080405473709106
+        },
+        {
+          "imageId": "img-17",
+          "imagePath": "DisasterVQA/MEDIC/000646.jpg",
+          "imageSha256": "5c25c1fb25d76ffeb0c2f840c5100a5f9a99d6f8d95dfc9bee0bb574dee0885a",
+          "expected": "landslide",
+          "predicted": "landslide",
+          "winningDescription": "mud and rocks from a landslide covering a slope or road",
+          "modelScore": 0.969988226890564
+        },
+        {
+          "imageId": "img-988",
+          "imagePath": "DisasterVQA/CrisisMMD/870288120150765568_0.jpg",
+          "imageSha256": "358136360fffe142d7239115e39aca7be388ee07fcb00d3d407a5fad6d8792fa",
+          "expected": "landslide",
+          "predicted": "landslide",
+          "winningDescription": "mud and rocks from a landslide covering a slope or road",
+          "modelScore": 0.5154240727424622
+        },
+        {
+          "imageId": "img-36",
+          "imagePath": "DisasterVQA/MEDIC/000651.jpg",
+          "imageSha256": "19c04b02fd6c93af7daec4914531981c863201f41b1b208b950b6e4456bf87ed",
+          "expected": "landslide",
+          "predicted": "landslide",
+          "winningDescription": "mud and rocks from a landslide covering a slope or road",
+          "modelScore": 0.9441521167755127
+        },
+        {
+          "imageId": "img-16",
+          "imagePath": "DisasterVQA/MEDIC/000578.jpg",
+          "imageSha256": "fb957976e653baec6af806c4a09a15ede0becfbd3a3384def51841cd13eaf895",
+          "expected": "landslide",
+          "predicted": "landslide",
+          "winningDescription": "mud and rocks from a landslide covering a slope or road",
+          "modelScore": 0.8126630187034607
+        },
+        {
+          "imageId": "img-1003",
+          "imagePath": "DisasterVQA/CrisisMMD/870419183632228353_0.jpg",
+          "imageSha256": "747eef1df94098a886d8b13d7537e9110addb96d7486758ab77edbb5d3adf26f",
+          "expected": "landslide",
+          "predicted": "landslide",
+          "winningDescription": "mud and rocks from a landslide covering a slope or road",
+          "modelScore": 0.8305914402008057
+        },
+        {
+          "imageId": "img-7",
+          "imagePath": "DisasterVQA/MEDIC/road_damage_803.jpg",
+          "imageSha256": "79ee8b8e4f34e7fa9d66928c245c915482b8c2d5d4a3a1f6eb34ecdab83d352e",
+          "expected": "landslide",
+          "predicted": "landslide",
+          "winningDescription": "mud and rocks from a landslide covering a slope or road",
+          "modelScore": 0.9321286678314209
+        }
+      ]
+    }
+  ],
+  "unavailable": [],
+  "previousRunAt": "2026-11-02T06:50:58.120Z"
+}

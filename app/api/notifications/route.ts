@@ -1,0 +1,4 @@
+import {requireAccount,mutationGuard} from "../../../lib/auth";
+import {db} from "../../../lib/server";
+export async function GET(request:Request){const user=await requireAccount(request);if(user instanceof Response)return user;const rows=await db().prepare("SELECT id,title,report_id as reportId,created_at as createdAt,read_at as readAt FROM app_notifications WHERE user_id=? ORDER BY created_at DESC LIMIT 100").bind(user.id).all();return Response.json({notifications:rows.results},{headers:{"Cache-Control":"no-store"}});}
+export async function POST(request:Request){const guard=mutationGuard(request);if(guard)return guard;const user=await requireAccount(request);if(user instanceof Response)return user;await db().prepare("UPDATE app_notifications SET read_at=? WHERE user_id=? AND read_at IS NULL").bind(new Date().toISOString(),user.id).run();return Response.json({ok:true});}

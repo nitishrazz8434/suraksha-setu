@@ -10,7 +10,7 @@
     "dev": "node scripts/run-framework.mjs dev",
     "build": "node scripts/run-framework.mjs build",
     "start": "node --import ./scripts/sites-env.mjs ./node_modules/wrangler/bin/wrangler.js dev --config dist/server/wrangler.json --local --persist-to .wrangler/state --ip 127.0.0.1 --inspector-port 0",
-    "lint": "eslint . --ignore-pattern dist --ignore-pattern .next",
+    "lint": "eslint . --ignore-pattern dist --ignore-pattern .next --ignore-pattern public/ai/inference-worker.js --ignore-pattern public/pdf.worker.min.mjs",
     "db:generate": "drizzle-kit generate",
     "test": "node scripts/test.mjs",
     "typecheck": "tsc --noEmit",
@@ -18,6 +18,7 @@
     "test:api": "node tests/api.integration.mjs",
     "test:models": "node scripts/model-smoke.mjs",
     "test:models:extended": "node scripts/model-smoke.mjs --extended",
+    "evaluate:models": "node scripts/model-evaluate.mjs",
     "predev": "node scripts/build-ai-worker.mjs",
     "prebuild": "node scripts/build-ai-worker.mjs"
   },

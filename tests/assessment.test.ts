@@ -42,7 +42,7 @@ test("invalid vehicle grouping and inconsistent stored totals are rejected",asyn
  assert(!assumptionSchema.safeParse({...DEFAULT_ASSUMPTIONS,householdSize:10,vehicleSeats:5}).success);const p=await assess(catalog,connectReferenceDistricts(createWorkspace()),DEFAULT_ASSUMPTIONS,solver,fresh());assert(!assessmentSchema.safeParse({...p,served:p.served+1}).success);
 });
 test("missing rainfall observations stay unknown and screening never changes the hazard register",()=>{
- const w=createWorkspace();assert.equal(rainOutlook().label,"Awaiting forecast");const r=rainOutlook({districtId:"test",fetchedAt:new Date().toISOString(),observedAt:"",source:"Unit-test forecast",temperature:null,precipitation:null,weatherCode:null,days:[{date:"2026-11-01",rain:70,probability:100,high:30,low:20}]});assert.equal(r.label,"High rainfall outlook");assert.equal(w.hazards.length,0);
+ const w=createWorkspace();assert.equal(rainOutlook().label,"Forecast unavailable");const r=rainOutlook({districtId:"test",fetchedAt:new Date().toISOString(),observedAt:"",source:"Unit-test forecast",temperature:null,precipitation:null,weatherCode:null,days:[{date:"2026-11-01",rain:70,probability:100,high:30,low:20}]});assert.equal(r.label,"High rainfall screen");assert.equal(w.hazards.length,0);
 });
 
 import {decodeForecast,unavailableForecast,weatherUrl} from "../lib/weather";
